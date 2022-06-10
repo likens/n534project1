@@ -149,7 +149,7 @@ body {
 .menu button {
     font-family: '04b31';
     color: var(--text);
-    background: var(--black);
+    background: rgba(0,0,0, .5);
     border: 2px solid var(--text);
     padding: 1.5rem 2rem 1rem;
     text-transform: uppercase;
@@ -159,6 +159,7 @@ body {
 }
 
 .todo {
+    display: none;
     position: absolute;
     left: 3rem;
     bottom: 3rem;
