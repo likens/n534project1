@@ -1,0 +1,248 @@
+:root {
+    --transparent: rgba(0,0,0,0);
+    --black: rgba(0,0,0,1);
+    --cyan: rgba(54, 226, 248, 0.25);
+    --green1: rgba(22, 240, 95, .35);
+    --green2: rgba(22, 240, 95, 1);
+    --violet: rgba(209, 54, 248, 0.25);
+    --lines: var(--green1);
+    --text: var(--green2);
+    --perspective: perspective(30rem) rotateX(40deg) scale(2);
+}
+@font-face {
+    font-family: 'Delta Ray Chrome';
+    src: url('../fonts/delta-ray-chrome.woff2') format('woff2'),
+         url('../fonts/delta-ray-chrome.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: '04b31';
+    src: url('../fonts/04b31.woff2') format('woff2'),
+         url('../fonts/04b31.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'M42';
+    src: url('../fonts/m42.woff2') format('woff2'),
+         url('../fonts/m42.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 48C2C5 */
+*, 
+*:before, 
+*:after {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html {
+    font-family: sans-serif;
+	font-size: 62.5%;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    background: var(--black);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    color: var(--text);
+    font-family: 'M42';
+}
+
+.master {
+    position: relative;
+    overflow: hidden;
+}
+
+.title {
+    color: var(--text);
+    font-family: 'Delta Ray Chrome';
+    font-size: 12rem;
+    line-height: .8;
+    position: absolute;
+    top: 12rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.graph {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.lines {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, var(--transparent) 0px, var(--lines) 0%, var(--lines) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--lines) 0%, var(--lines) 3px, var(--transparent) 0px); 
+    background-size: 4em 2em, 4em 2em;
+    /* height: 40em;
+    perspective: 100rem;
+    margin-top: 20em;
+    transform: perspective(20rem) rotateX(45deg) scale(2); */
+    height: 100vh;
+    margin: 30rem 0 0 -50%;
+    transform: var(--perspective);
+    width: 200vw;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.lines--1 {
+    transform: var(--perspective) translateY(0);
+    animation-name: glide1;
+}
+.lines--2 {
+    transform: var(--perspective) translateY(-100%);
+    animation-name: glide2;
+}
+
+.lines--3 {
+    transform: var(--perspective) translateY(100%);
+    animation-name: glide3;
+}
+
+.lines--4 {
+    transform: var(--perspective) translateY(200%);
+    animation-name: glide4;
+}
+
+.lines--5 {
+    transform: var(--perspective) translateY(-200%);
+}
+
+.mountain {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 50%;
+    min-width: 100vw;
+    transform: translateX(-50%);
+    opacity: .25;
+}
+
+.menu {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 35rem;
+}
+
+.menu ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    grid-gap: 2rem;
+}
+
+.menu button {
+    font-family: '04b31';
+    color: var(--text);
+    background: var(--black);
+    border: 2px solid var(--text);
+    padding: 1.5rem 2rem 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: 1;
+    font-size: 2rem;
+}
+
+.todo {
+    position: absolute;
+    left: 3rem;
+    bottom: 3rem;
+    font-size: 1.2rem;
+    max-width: 30rem;
+    line-height: 1.5;
+}
+
+.credits {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.scanlines {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.scanlines:before,
+.scanlines:after {
+    display: block;
+    pointer-events: none;
+    content: '';
+    position: absolute;
+}
+
+.scanlines:before {
+    width: 100%;
+    height: 2px;
+    z-index: 2147483649;
+    background: rgba(0, 0, 0, .3);
+    opacity: .75;
+    animation: scanline 6s linear infinite;
+}
+
+.scanlines:after {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2147483648;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, .3) 51%
+    );
+    background-size: 100% 4px;
+    animation: scanlines 1s steps(60) infinite;
+}
+
+@keyframes scanline {
+    0% { transform: translate3d(0,200000%,0) }
+}
+
+@keyframes scanlines {
+    0% { background-position: 0 50% }
+}
+
+@keyframes glide1 {
+    from { transform: var(--perspective) translateY(0) }
+    to { transform: var(--perspective) translateY(-100%) }
+}
+
+@keyframes glide2 {
+    from { transform: var(--perspective) translateY(-100%) }
+    to { transform: var(--perspective) translateY(-200%) }
+}
+
+@keyframes glide3 {
+    from { transform: var(--perspective) translateY(100%) }
+    to { transform: var(--perspective) translateY(0) }
+}
+
+@keyframes glide4 {
+    from { transform: var(--perspective) translateY(200%) }
+    to { transform: var(--perspective) translateY(100%) }
+}
