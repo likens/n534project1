@@ -1,18 +1,37 @@
 :root {
     --transparent: rgba(0,0,0,0);
     --black: rgba(0,0,0,1);
-    --cyan: rgba(54, 226, 248, 0.25);
+    --blue1: rgba(54, 226, 248, .35);
+    --blue2: rgba(54, 226, 248, 1);
+    --blue3: rgba(17, 71, 78, 0.9);
+    --purple1: rgba(209, 54, 248, .35);
+    --purple2: rgba(209, 54, 248, 1);
+    --purple3: rgba(62, 15, 73, 0.9);
     --green1: rgba(22, 240, 95, .35);
     --green2: rgba(22, 240, 95, 1);
-    --violet: rgba(209, 54, 248, 0.25);
+    --green3: rgba(6, 61, 25, 0.9);
+    --red1: rgba(240, 36, 0, .35);
+    --red2: rgba(240, 36, 0, 1);
+    --red3: rgba(100, 16, 1, 0.9);
+    --yellow1: rgba(255, 249, 84, .35);
+    --yellow2: rgba(255, 249, 84, 1);
+    --yellow3: rgba(87, 85, 29, 0.9);
     --lines: var(--green1);
     --text: var(--green2);
-    --perspective: perspective(30rem) rotateX(40deg) scale(2);
+    --perspectiveog: perspective(30rem) rotateX(40deg) scale(2);
+    --perspective: perspective(60rem) rotateX(20deg) scale(2);
 }
 @font-face {
     font-family: 'Delta Ray Chrome';
     src: url('../fonts/delta-ray-chrome.woff2') format('woff2'),
          url('../fonts/delta-ray-chrome.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Delta Ray 3D';
+    src: url('../fonts/delta-ray-3d.woff2') format('woff2'),
+         url('../fonts/delta-ray-3d.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -30,7 +49,6 @@
     font-weight: normal;
     font-style: normal;
 }
-/* 48C2C5 */
 *, 
 *:before, 
 *:after {
@@ -41,11 +59,10 @@
 html {
     font-family: sans-serif;
 	font-size: 62.5%;
-	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
 }
 
 body {
-    font-size: 1.6rem;
     line-height: 1.25;
     background: var(--black);
     margin: 0;
@@ -53,28 +70,42 @@ body {
     width: 100%;
     height: 100vh;
     color: var(--text);
-    font-family: 'M42';
 }
 
 .master {
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+    grid-gap: 5rem;
+    align-items: flex-start;
 }
 
 .title {
+    width: 100%;
     color: var(--text);
     font-family: 'Delta Ray Chrome';
-    font-size: 12rem;
+    font-size: 8rem;
+    padding: 5rem 0 0 4rem;
     line-height: .8;
-    position: absolute;
-    top: 12rem;
-    left: 50%;
-    transform: translate(-50%, 0);
+    transform: skew(-10deg);
+    display: grid;
+    justify-content: center;
 }
 
 .graph {
     overflow: hidden;
     height: 100vh;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    pointer-events: none;
 }
 
 .lines {
@@ -83,7 +114,7 @@ body {
     top: 0;
     left: 0;
     background: linear-gradient(180deg, var(--transparent) 0px, var(--lines) 0%, var(--lines) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--lines) 0%, var(--lines) 3px, var(--transparent) 0px); 
-    background-size: 4em 2em, 4em 2em;
+    background-size: 4em 4em, 8em 2em;
     /* height: 40em;
     perspective: 100rem;
     margin-top: 20em;
@@ -92,7 +123,7 @@ body {
     margin: 30rem 0 0 -50%;
     transform: var(--perspective);
     width: 200vw;
-    animation-duration: 5s;
+    animation-duration: 30s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
@@ -131,11 +162,12 @@ body {
 }
 
 .menu {
-    position: absolute;
     text-align: center;
-    left: 50%;
-    transform: translate(-50%, 0);
-    top: 35rem;
+    z-index: 10;
+}
+
+.menu--hide {
+    display: none;
 }
 
 .menu ul {
@@ -143,19 +175,207 @@ body {
     margin: 0;
     list-style: none;
     display: grid;
-    grid-gap: 2rem;
+    grid-gap: 3rem;
+}
+
+.menu--racer ul {
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .menu button {
-    font-family: '04b31';
+    font-family: 'M42';
+    /* font-family: '04b31'; */
     color: var(--text);
     background: rgba(0,0,0, .5);
     border: 2px solid var(--text);
-    padding: 1.5rem 2rem 1rem;
+    padding: 2rem 3rem 1.5rem;
     text-transform: uppercase;
     cursor: pointer;
+    max-width: 40rem;
+    /* min-width: 42rem; */
     line-height: 1;
-    font-size: 2rem;
+    font-size: 1.4rem;
+    position: relative;
+    overflow: hidden;
+    transition: all .25s ease;
+    transform: skew(-20deg);
+    width: 100%;
+}
+
+.menu .menu__back {
+    min-width: 10rem;
+    width: auto;
+    margin-top: 5rem;
+    font-size: 1.2rem;
+    padding-top: 2rem;
+    transform: skew(-20deg);
+}
+
+.menu li {
+    opacity: 0;
+    animation: zoomInCenter 1s ease forwards;
+}
+
+.menu li:last-child {
+    grid-column: 1 / -1;
+}
+
+.menu li:nth-child(1) {
+    animation-delay: .1s;
+}
+
+.menu li:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.menu li:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.menu li:nth-child(4) {
+    animation-delay: .4s;
+}
+
+.menu li:nth-child(5) {
+    animation-delay: .5s;
+}
+
+.menu li:nth-child(6) {
+    animation-delay: .6s;
+}
+
+.menu--racer button {
+    transform: skew(0);
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+
+.menu--racer li:nth-child(1) button {
+    border-color: var(--blue2);
+    color: var(--blue2);
+}
+
+.menu--racer li:nth-child(2) button {
+    border-color: var(--yellow2);
+    color: var(--yellow2);
+}
+
+.menu--racer li:nth-child(3) button {
+    border-color: var(--purple2);
+    color: var(--purple2);
+}
+
+.menu--racer li:nth-child(4) button {
+    border-color: var(--red2);
+    color: var(--red2);
+}
+
+.menu--racer li:nth-child(1) button .cube > div {
+    border-color: var(--blue2);
+}
+
+.menu--racer li:nth-child(2) button .cube > div {
+    border-color: var(--yellow2);
+}
+
+.menu--racer li:nth-child(3) button .cube > div {
+    border-color: var(--purple2);
+}
+
+.menu--racer li:nth-child(4) button .cube > div {
+    border-color: var(--red2);
+}
+
+.menu button:hover {
+    box-shadow: 1px 1px 4rem 1rem var(--green1);
+    background: var(--green1);
+}
+
+.menu--racer li:nth-child(1) button:hover {
+    box-shadow: 1px 1px 4rem 1rem var(--blue1);
+    background: var(--blue1);
+}
+
+.menu--racer li:nth-child(2) button:hover {
+    box-shadow: 1px 1px 4rem 1rem var(--yellow1);
+    background: var(--yellow1);
+}
+
+.menu--racer li:nth-child(3) button:hover {
+    box-shadow: 1px 1px 4rem 1rem var(--purple1);
+    background: var(--purple1);
+}
+
+.menu--racer li:nth-child(4) button:hover {
+    box-shadow: 1px 1px 4rem 1rem var(--red1);
+    background: var(--red1);
+}
+
+.menu--racer li:nth-child(1) button:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--blue1),
+        transparent
+    );
+}
+
+.menu--racer li:nth-child(2) button:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--yellow1),
+        transparent
+    );
+}
+
+.menu--racer li:nth-child(3) button:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--purple1),
+        transparent
+    );
+}
+
+.menu--racer li:nth-child(4) button:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--red1),
+        transparent
+    );
+}
+
+.menu button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--green1),
+        transparent
+    );
+    transition: all .5s;
+}
+  
+.menu button:hover:before {
+    transform: translateX(100%);
+}
+
+.menu__title {
+    font-family: 'M42';
+    /* font-family: '04b31'; */
+    text-transform: uppercase;
+    font-size: 2.4rem;
+    padding: 0 0 5rem;
+    white-space: nowrap;
+    animation: zoomInCenter 1s ease forwards;
 }
 
 .todo {
@@ -168,14 +388,14 @@ body {
     line-height: 1.5;
 }
 
-.credits {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    text-align: center;
+.footer {
+    text-transform: uppercase;
+    font-family: '04b31';
     padding: 2rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
     width: 100%;
+    align-self: flex-end;
 }
 
 .scanlines {
@@ -227,6 +447,38 @@ body {
     animation: scanlines 1s steps(60) infinite;
 } */
 
+.cube {
+	position: relative;
+	width: 5rem;
+    height: 5rem;
+	animation: spin 10s infinite linear;
+	transform-style: preserve-3d;
+    margin: 0 auto 2rem;
+    transform: skew(0);
+}
+
+.cube > div {
+	border: 2px solid #333;
+	position: absolute;
+	width: 5rem; 
+    height: 5rem;
+	transition: transform 2s;
+}
+
+/* This is where the 3D magic happens */
+@keyframes spin {
+	from { transform: rotateY(0) rotateX(0); }
+	to   { transform: rotateY(-360deg) rotateX(360deg); }
+}
+
+/* 3D positioning for each of the images/links */
+.one { transform: rotateX(90deg) translateZ(25px); }
+.two { transform: translateZ(25px); }
+.three { transform: rotateY(90deg) translateZ(25px); }
+.four { transform: rotateY(180deg) translateZ(25px); }
+.five { transform: rotateY(-90deg) translateZ(25px); }
+.six { transform: rotateX(-90deg) translateZ(25px); }
+
 @keyframes scanline {
     0% { transform: translate3d(0,200000%,0) }
 }
@@ -237,20 +489,35 @@ body {
 
 @keyframes glide1 {
     from { transform: var(--perspective) translateY(0) }
-    to { transform: var(--perspective) translateY(-100%) }
+    to { transform: var(--perspective) translateY(100%) }
 }
 
 @keyframes glide2 {
-    from { transform: var(--perspective) translateY(-100%) }
-    to { transform: var(--perspective) translateY(-200%) }
+    from { transform: var(--perspective) translateY(100%) }
+    to { transform: var(--perspective) translateY(200%) }
 }
 
 @keyframes glide3 {
-    from { transform: var(--perspective) translateY(100%) }
+    from { transform: var(--perspective) translateY(-100%) }
     to { transform: var(--perspective) translateY(0) }
 }
 
 @keyframes glide4 {
-    from { transform: var(--perspective) translateY(200%) }
-    to { transform: var(--perspective) translateY(100%) }
+    from { transform: var(--perspective) translateY(-200%) }
+    to { transform: var(--perspective) translateY(-100%) }
+}
+
+@keyframes fadeInLeft { 
+    0% {opacity:0;transform:translateX(-100vw);}
+    100% {opacity:1;transform:translateX(0);}
+}
+
+@keyframes fadeOutRight {
+    0% {opacity:1;transform:translateX(0);}
+    100% {opacity:0;transform:translateX(100vw);}
+}
+
+@keyframes zoomInCenter { 
+    0% {opacity:0;transform:scale(0);}
+    100% {opacity:1;transform:scale(1);}
 }

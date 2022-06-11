@@ -14,16 +14,126 @@
                 <div class="title__type">type</div>
                 <div class="title__racer">racer</div>
             </div>
-            <div class="menu">
+            <div class="menu" id="menuBegin">
                 <ul>
                     <li>
-                        <button>Start</button>
+                        <button class="menu__next">Start</button>
                     </li>
                     <li>
                         <button>Leaderboard</button>
                     </li>
                     <li>
-                        <button>Customize</button>
+                        <button>Credits</button>
+                    </li>
+                    <li>
+                        <button>Quit</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="menu menu--racer menu--hide" id="menuRacer">
+                <div class="menu__title">Select Your Racer</div>
+                <ul>
+                    <li>
+                        <button class="menu__next">
+                            <div class="cube">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                                <div class="three"></div>
+                                <div class="four"></div>
+                                <div class="five"></div>
+                                <div class="six"></div>
+                            </div>
+                            <br />
+                            QWERTY
+                        </button>
+                    </li>
+                    <li>
+                        <button class="menu__next">
+                            <div class="cube">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                                <div class="three"></div>
+                                <div class="four"></div>
+                                <div class="five"></div>
+                                <div class="six"></div>
+                            </div>
+                            <br />
+                            Dvorak
+                        </button>
+                    </li>
+                    <li>
+                        <button class="menu__next">
+                            <div class="cube">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                                <div class="three"></div>
+                                <div class="four"></div>
+                                <div class="five"></div>
+                                <div class="six"></div>
+                            </div>
+                            <br />
+                            Colemak
+                        </button>
+                    </li>
+                    <li>
+                        <button class="menu__next">
+                            <div class="cube">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                                <div class="three"></div>
+                                <div class="four"></div>
+                                <div class="five"></div>
+                                <div class="six"></div>
+                            </div>
+                            <br />
+                            Workman
+                        </button>
+                    </li>
+                    <li>
+                        <button class="menu__back">&lt; Back</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="menu menu--row menu--hide" id="menuRow">
+                <div class="menu__title">Select A Key Row</div>
+                <ul>
+                    <li>
+                        <button class="menu__next">Home Row</button>
+                    </li>
+                    <li>
+                        <button class="menu__next">Top Row</button>
+                    </li>
+                    <li>
+                        <button class="menu__next">Bottom Row</button>
+                    </li>
+                    <li>
+                        <button class="menu__next">Number Row</button>
+                    </li>
+                    <li>
+                        <button class="menu__next">All Rows</button>
+                    </li>
+                    <li>
+                        <button class="menu__back">&lt; Back</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="menu menu--skill menu--hide" id="menuSkill">
+                <div class="menu__title">Select A Difficulty</div>
+                <ul>
+                    <li>
+                        <button class="menu__next">Easy</button>
+                    </li>
+                    <li>
+                        <button class="menu__next">Normal</button>
+                    </li>
+                    <li>
+                        <button class="menu__next">Advanced</button>
+                    </li>
+                    <li>
+                        <button class="menu__next">Expert</button>
+                    </li>
+                    <li>
+                        <button class="menu__back">&lt; Back</button>
                     </li>
                 </ul>
             </div>
@@ -57,9 +167,42 @@
                 <div class="lines lines--4"></div>
                 <div class="lines lines--5"></div>
             </div>
-            <div class="credits">&copy; N534 - Summer 2022</div>
+            <div class="footer">
+                v0.0.1 alpha test
+                <br />
+                N534 - Summer 2022
+            </div>
             <div class="scanlines"></div>
         </div>
     </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const menuHide = "menu--hide";
+            const menuStructure = ["menuBegin", "menuRacer", "menuRow", "menuSkill", "menuGame"];
+            let menuIndex = 0;
+            const menus = [...document.getElementsByClassName("menu")];
+
+            const btnNext = [...document.getElementsByClassName("menu__next")];
+            const btnBack = [...document.getElementsByClassName("menu__back")];
+
+            btnNext.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    menuIndex++;
+                    menus.forEach(menu => menu.classList.add(menuHide));
+                    document.getElementById(menuStructure[menuIndex]).classList.remove(menuHide);
+                });
+            });
+            btnBack.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    menuIndex--;
+                    menus.forEach(menu => menu.classList.add(menuHide));
+                    document.getElementById(menuStructure[menuIndex]).classList.remove(menuHide);
+                });
+            });
+
+        });
+    </script>
 
 </html>
