@@ -1,25 +1,30 @@
 :root {
     --transparent: rgba(0,0,0,0);
     --black: rgba(0,0,0,1);
-    --blue1: rgba(54, 226, 248, .35);
-    --blue2: rgba(54, 226, 248, 1);
-    --blue3: rgba(17, 71, 78, 0.9);
+    --blue1: rgba(54, 99, 248, .35);
+    --blue2: rgba(54, 99, 248, 1);
     --purple1: rgba(209, 54, 248, .35);
     --purple2: rgba(209, 54, 248, 1);
-    --purple3: rgba(62, 15, 73, 0.9);
     --green1: rgba(22, 240, 95, .35);
     --green2: rgba(22, 240, 95, 1);
-    --green3: rgba(6, 61, 25, 0.9);
     --red1: rgba(240, 36, 0, .35);
     --red2: rgba(240, 36, 0, 1);
-    --red3: rgba(100, 16, 1, 0.9);
     --yellow1: rgba(255, 249, 84, .35);
     --yellow2: rgba(255, 249, 84, 1);
-    --yellow3: rgba(87, 85, 29, 0.9);
+    --orange1: rgba(234, 159, 20, .5);
+    --orange2: rgba(234, 159, 20, 1);
+    --tan1: rgba(210, 180, 140, .5);
+    --tan2: rgba(210, 180, 140, 1);
+    --ice1: rgba(44, 206, 225, 0.5);
+    --ice2: rgba(44, 206, 225, 1);
+    --olive1: rgba(122, 197, 0, 0.5);
+    --olive2: rgba(122, 197, 0, 1);
     --lines: var(--green1);
     --text: var(--green2);
-    --perspectiveog: perspective(30rem) rotateX(40deg) scale(2);
+    /* --perspective: perspective(30rem) rotateX(40deg) scale(2); */
     --perspective: perspective(60rem) rotateX(20deg) scale(2);
+    --perspectiveGame: perspective(20rem) rotateX(20deg) scale(2);
+    --glow: 1px 1px 4rem 1rem;
 }
 @font-face {
     font-family: 'Delta Ray Chrome';
@@ -29,23 +34,16 @@
     font-style: normal;
 }
 @font-face {
-    font-family: 'Delta Ray 3D';
-    src: url('../fonts/delta-ray-3d.woff2') format('woff2'),
-         url('../fonts/delta-ray-3d.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: '04b31';
-    src: url('../fonts/04b31.woff2') format('woff2'),
-         url('../fonts/04b31.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
     font-family: 'M42';
     src: url('../fonts/m42.woff2') format('woff2'),
          url('../fonts/m42.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Retro Gaming';
+    src: url('../fonts/retro-gaming.woff2') format('woff2'),
+         url('../fonts/retro-gaming.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -70,16 +68,25 @@ body {
     width: 100%;
     height: 100vh;
     color: var(--text);
+    font-family: 'Retro Gaming';
 }
 
 .master {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container {
     position: relative;
     overflow: hidden;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 100vw;
-    height: 100vh;
+    width: 1024px;
+    height: 768px;
     grid-gap: 5rem;
     align-items: flex-start;
 }
@@ -88,23 +95,68 @@ body {
     width: 100%;
     color: var(--text);
     font-family: 'Delta Ray Chrome';
-    font-size: 8rem;
-    padding: 5rem 0 0 4rem;
-    line-height: .8;
-    transform: skew(-10deg);
+    font-size: 10rem;
+    line-height: .75;
+    transform: skew(-20deg);
     display: grid;
     justify-content: center;
+    animation: zoomInCenter 1s ease forwards;
+    padding: 10rem 0;
+}
+
+.title--hide {
+    display: none;
+}
+
+.story {
+    display: grid;
+    grid-gap: 3rem;
+}
+
+.story__title {
+    opacity: 0;
+    animation: zoomInCenter 1s ease forwards;
+    font-family: 'M42';
+    font-size: 3.2rem;
+    display: block;
+    text-align: center;
+    padding: 6rem 0 0;
+    line-height: 2;
+    font-style: italic;
+}
+
+.story__content {
+    opacity: 0;
+    animation: zoomInCenter 1s ease forwards;
+    animation-delay: .3s;
+    font-size: 3rem;
+    font-variant: small-caps;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 0 0 1rem;
+}
+
+.story__next {
+    opacity: 0;
+    animation: zoomInCenter 1s ease forwards;
+    animation-delay: .5s;
+}
+
+.story__back {
+    opacity: 0;
+    animation: zoomInCenter 1s ease forwards;
+    animation-delay: .6s;
 }
 
 .graph {
     overflow: hidden;
-    height: 100vh;
     opacity: .5;
     position: absolute;
-    top: 0;
+    top: 50%;
     width: 100vw;
     height: 100vh;
-    left: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
     pointer-events: none;
 }
 
@@ -126,12 +178,14 @@ body {
     animation-duration: 30s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    transition: all 2s ease;
 }
 
 .lines--1 {
     transform: var(--perspective) translateY(0);
     animation-name: glide1;
 }
+
 .lines--2 {
     transform: var(--perspective) translateY(-100%);
     animation-name: glide2;
@@ -151,7 +205,56 @@ body {
     transform: var(--perspective) translateY(-200%);
 }
 
-.mountain {
+.graph--out .lines {
+    opacity: 0;
+}
+
+.graph--game .lines {
+    animation-duration: 5s;
+}
+
+.graph--game .lines--1 {
+    transform: var(--perspectiveGame) translateY(0);
+    animation-name: game1;
+}
+
+.graph--game .lines--2 {
+    transform: var(--perspectiveGame) translateY(-100%);
+    animation-name: game2;
+}
+
+.graph--game .lines--3 {
+    transform: var(--perspectiveGame) translateY(100%);
+    animation-name: game3;
+}
+
+.graph--game .lines--4 {
+    transform: var(--perspectiveGame) translateY(200%);
+    animation-name: game4;
+}
+
+.graph--game .lines--5 {
+    transform: var(--perspectiveGame) translateY(-200%);
+    transition: opacity 2s ease;
+}
+
+.graph--desert .lines {
+    background-image: linear-gradient(180deg, var(--transparent) 0px, var(--tan1) 0%, var(--tan1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--tan1) 0%, var(--tan1) 3px, var(--transparent) 0px); 
+}
+
+.graph--tropical .lines {
+    background-image: linear-gradient(180deg, var(--transparent) 0px, var(--olive1) 0%, var(--olive1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--olive1) 0%, var(--olive1) 3px, var(--transparent) 0px); 
+}
+
+.graph--mountain .lines {
+    background-image: linear-gradient(180deg, var(--transparent) 0px, var(--ice1) 0%, var(--ice1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--ice1) 0%, var(--ice1) 3px, var(--transparent) 0px); 
+}
+
+.graph--sunset .lines {
+    background-image: linear-gradient(180deg, var(--transparent) 0px, var(--orange1) 0%, var(--orange1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--orange1) 0%, var(--orange1) 3px, var(--transparent) 0px); 
+}
+
+/* .mountain {
     position: absolute;
     top: 0;
     left: 50%;
@@ -159,7 +262,7 @@ body {
     min-width: 100vw;
     transform: translateX(-50%);
     opacity: .25;
-}
+} */
 
 .menu {
     text-align: center;
@@ -179,8 +282,26 @@ body {
 }
 
 .menu--racer ul {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.menu--row ul {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.menu--skill ul {
     grid-template-columns: repeat(2, 1fr);
 }
+
+/* .menu--mode ul {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.menu--track ul {
+    grid-template-columns: repeat(3, 1fr);
+} */
 
 .menu button {
     font-family: 'M42';
@@ -188,7 +309,7 @@ body {
     color: var(--text);
     background: rgba(0,0,0, .5);
     border: 2px solid var(--text);
-    padding: 2rem 3rem 1.5rem;
+    padding: 2rem 2rem 1.5rem;
     text-transform: uppercase;
     cursor: pointer;
     max-width: 40rem;
@@ -202,13 +323,38 @@ body {
     width: 100%;
 }
 
-.menu .menu__back {
+.menu .menu__back{
     min-width: 10rem;
     width: auto;
-    margin-top: 5rem;
+    margin-top: 2rem;
     font-size: 1.2rem;
     padding-top: 2rem;
-    transform: skew(-20deg);
+}
+
+.menu button:hover {
+    box-shadow: var(--glow) var(--green1);
+    background: var(--green1);
+}
+
+.menu button:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--green1),
+        transparent
+    );
+    transition: all .5s;
+}
+  
+.menu button:hover:before {
+    transform: translateX(100%);
 }
 
 .menu li {
@@ -221,33 +367,31 @@ body {
 }
 
 .menu li:nth-child(1) {
-    animation-delay: .1s;
-}
-
-.menu li:nth-child(2) {
     animation-delay: .2s;
 }
 
-.menu li:nth-child(3) {
+.menu li:nth-child(2) {
     animation-delay: .3s;
 }
 
-.menu li:nth-child(4) {
+.menu li:nth-child(3) {
     animation-delay: .4s;
 }
 
-.menu li:nth-child(5) {
+.menu li:nth-child(4) {
     animation-delay: .5s;
 }
 
-.menu li:nth-child(6) {
+.menu li:nth-child(5) {
     animation-delay: .6s;
 }
 
+.menu li:nth-child(6) {
+    animation-delay: .7s;
+}
+
 .menu--racer button {
-    transform: skew(0);
-    padding-top: 3rem;
-    padding-bottom: 2rem;
+    padding: 3rem 2rem 2rem;
 }
 
 .menu--racer li:nth-child(1) button {
@@ -261,54 +405,63 @@ body {
 }
 
 .menu--racer li:nth-child(3) button {
-    border-color: var(--purple2);
-    color: var(--purple2);
-}
-
-.menu--racer li:nth-child(4) button {
     border-color: var(--red2);
     color: var(--red2);
 }
 
+.menu--racer li:nth-child(4) button {
+    border-color: var(--purple2);
+    color: var(--purple2);
+}
+
 .menu--racer li:nth-child(1) button .cube > div {
     border-color: var(--blue2);
+    background: var(--blue1);
 }
 
 .menu--racer li:nth-child(2) button .cube > div {
     border-color: var(--yellow2);
+    background: var(--yellow1);
 }
 
 .menu--racer li:nth-child(3) button .cube > div {
-    border-color: var(--purple2);
+    border-color: var(--red2);
+    background: var(--red1);
 }
 
 .menu--racer li:nth-child(4) button .cube > div {
-    border-color: var(--red2);
+    border-color: var(--purple2);
+    background: var(--purple1);
 }
 
-.menu button:hover {
-    box-shadow: 1px 1px 4rem 1rem var(--green1);
-    background: var(--green1);
+.menu--row button {
+    line-height: 2;
+}
+
+.menu--row img {
+    display: block;
+    margin: 0 auto 2rem;
+    max-width: 80%;
 }
 
 .menu--racer li:nth-child(1) button:hover {
-    box-shadow: 1px 1px 4rem 1rem var(--blue1);
+    box-shadow: var(--glow) var(--blue1);
     background: var(--blue1);
 }
 
 .menu--racer li:nth-child(2) button:hover {
-    box-shadow: 1px 1px 4rem 1rem var(--yellow1);
+    box-shadow: var(--glow) var(--yellow1);
     background: var(--yellow1);
 }
 
 .menu--racer li:nth-child(3) button:hover {
-    box-shadow: 1px 1px 4rem 1rem var(--purple1);
-    background: var(--purple1);
+    box-shadow: var(--glow) var(--red1);
+    background: var(--red1);
 }
 
 .menu--racer li:nth-child(4) button:hover {
-    box-shadow: 1px 1px 4rem 1rem var(--red1);
-    background: var(--red1);
+    box-shadow: var(--glow) var(--purple1);
+    background: var(--purple1);
 }
 
 .menu--racer li:nth-child(1) button:before {
@@ -333,7 +486,7 @@ body {
     background: linear-gradient(
         120deg,
         transparent,
-        var(--purple1),
+        var(--red1),
         transparent
     );
 }
@@ -342,40 +495,113 @@ body {
     background: linear-gradient(
         120deg,
         transparent,
-        var(--red1),
+        var(--purple1),
         transparent
     );
-}
-
-.menu button:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-100%);
-    background: linear-gradient(
-        120deg,
-        transparent,
-        var(--green1),
-        transparent
-    );
-    transition: all .5s;
-}
-  
-.menu button:hover:before {
-    transform: translateX(100%);
 }
 
 .menu__title {
     font-family: 'M42';
     /* font-family: '04b31'; */
     text-transform: uppercase;
-    font-size: 2.4rem;
-    padding: 0 0 5rem;
+    font-size: 3rem;
+    padding: 15rem 0 5rem;
     white-space: nowrap;
     animation: zoomInCenter 1s ease forwards;
+}
+
+.menu__title-text {
+    transform: skew(-20deg);
+}
+
+.menu--track .desert {
+    border-color: var(--tan2);
+    color: var(--tan2);
+}
+
+.menu--track .mountain {
+    border-color: var(--ice2);
+    color: var(--ice2);
+}
+
+.menu--track .sunset {
+    border-color: var(--orange2);
+    color: var(--orange2);
+}
+
+.menu--track .tropical {
+    border-color: var(--olive2);
+    color: var(--olive2);
+}
+
+.menu--track .desert:hover {
+    box-shadow: var(--glow) var(--tan1);
+    background: var(--tan1);
+}
+
+.menu--track .mountain:hover {
+    box-shadow: var(--glow) var(--ice1);
+    background: var(--ice1);
+}
+
+.menu--track .sunset:hover {
+    box-shadow: var(--glow) var(--orange1);
+    background: var(--orange1);
+}
+
+.menu--track .tropical:hover {
+    box-shadow: var(--glow) var(--olive1);
+    background: var(--olive1);
+}
+
+.menu--track .desert:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--tan1),
+        transparent
+    );
+}
+
+.menu--track .mountain:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--ice1),
+        transparent
+    );
+}
+
+.menu--track .sunset:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--orange1),
+        transparent
+    );
+}
+
+.menu--track .tropical:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--olive1),
+        transparent
+    );
+}
+
+.menu--skill .emoticon {
+    font-family: 'Retro Gaming';
+    text-transform: none;
+    margin: 0 0 2rem;
+    font-size: 3rem;
+    transform: skew(20deg);
+    padding-right: 3rem;
+}
+
+.menu--skill .emoticon small {
+    position: relative;
+    top: -5px;
 }
 
 .todo {
@@ -390,12 +616,21 @@ body {
 
 .footer {
     text-transform: uppercase;
-    font-family: '04b31';
-    padding: 2rem;
+    font-family: 'Retro Gaming';
     font-size: 1.2rem;
-    line-height: 1.5;
     width: 100%;
-    align-self: flex-end;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.status {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    text-transform: uppercase;
+    font-family: 'Retro Gaming';
+    font-size: 1.2rem;
 }
 
 .scanlines {
@@ -406,16 +641,17 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    /* new */
-    background: linear-gradient(
+    /* background: linear-gradient(
         to bottom,
         transparent 50%,
         rgba(0, 0, 0, .3) 51%
     );
-    background-size: 100% 4px;
+    background-size: 100% 4px; */
+    border: 2px solid var(--text);
+    z-index: 100;
 }
 
-/* .scanlines:before,
+.scanlines:before,
 .scanlines:after {
     display: block;
     pointer-events: none;
@@ -445,7 +681,7 @@ body {
     );
     background-size: 100% 4px;
     animation: scanlines 1s steps(60) infinite;
-} */
+}
 
 .cube {
 	position: relative;
@@ -453,8 +689,7 @@ body {
     height: 5rem;
 	animation: spin 10s infinite linear;
 	transform-style: preserve-3d;
-    margin: 0 auto 2rem;
-    transform: skew(0);
+    margin: 0 auto 3rem;
 }
 
 .cube > div {
@@ -465,19 +700,31 @@ body {
 	transition: transform 2s;
 }
 
-/* This is where the 3D magic happens */
 @keyframes spin {
 	from { transform: rotateY(0) rotateX(0); }
 	to   { transform: rotateY(-360deg) rotateX(360deg); }
 }
 
-/* 3D positioning for each of the images/links */
-.one { transform: rotateX(90deg) translateZ(25px); }
-.two { transform: translateZ(25px); }
-.three { transform: rotateY(90deg) translateZ(25px); }
-.four { transform: rotateY(180deg) translateZ(25px); }
-.five { transform: rotateY(-90deg) translateZ(25px); }
-.six { transform: rotateX(-90deg) translateZ(25px); }
+.one { transform: rotateX(90deg) translateZ(2.5rem); }
+.two { transform: translateZ(2.5rem); }
+.three { transform: rotateY(90deg) translateZ(2.5rem); }
+.four { transform: rotateY(180deg) translateZ(2.5rem); }
+.five { transform: rotateY(-90deg) translateZ(2.5rem); }
+.six { transform: rotateX(-90deg) translateZ(2.5rem); }
+
+.cursor { 
+    animation: cursor infinite cubic-bezier(1, 0, 0, 1) 1s;
+    display: inline-block;
+    width: 1rem;
+    box-shadow: 0 0 1rem var(--green1);
+    background: var(--green2);
+    transform: skew(-20deg) translate(-1rem, 1rem);
+    height: 7rem;
+  }
+  
+@keyframes cursor { 
+    from { opacity: 1.0; } to { opacity: 0.0; }
+}
 
 @keyframes scanline {
     0% { transform: translate3d(0,200000%,0) }
@@ -506,6 +753,29 @@ body {
     from { transform: var(--perspective) translateY(-200%) }
     to { transform: var(--perspective) translateY(-100%) }
 }
+
+@keyframes game1 {
+    from { transform: var(--perspectiveGame) translateY(0) }
+    to { transform: var(--perspectiveGame) translateY(100%) }
+}
+
+@keyframes game2 {
+    from { transform: var(--perspectiveGame) translateY(100%) }
+    to { transform: var(--perspectiveGame) translateY(200%) }
+}
+
+@keyframes game3 {
+    from { transform: var(--perspectiveGame) translateY(-100%) }
+    to { transform: var(--perspectiveGame) translateY(0) }
+}
+
+@keyframes game4 {
+    from { transform: var(--perspectiveGame) translateY(-200%) }
+    to { transform: var(--perspectiveGame) translateY(-100%) }
+}
+
+
+
 
 @keyframes fadeInLeft { 
     0% {opacity:0;transform:translateX(-100vw);}
