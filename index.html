@@ -292,9 +292,9 @@
             });
             btnStart.forEach(btn => {
                 btn.addEventListener('click', function() {
+                    document.getElementById("statusTrack").innerText = btn.textContent;
                     menus.forEach(menu => menu.classList.add(menuHide));
                     graph.classList.add("graph--out");
-                    console.log(btn.classList);
                     setTimeout(() => {
                         graph.classList.remove("graph--out");
                         graph.classList.add("graph--game");
