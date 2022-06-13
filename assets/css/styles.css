@@ -27,7 +27,7 @@
     --text: var(--green2);
     /* --perspective: perspective(30rem) rotateX(40deg) scale(2); */
     --perspective: perspective(60rem) rotateX(20deg) scale(2);
-    --perspectiveGame: perspective(20rem) rotateX(20deg) scale(2);
+    --perspectiveGame: perspective(15rem) rotateX(20deg) scale(2);
     --glow: 1px 1px 4rem 1rem;
 }
 @font-face {
@@ -181,7 +181,7 @@ body {
     perspective: 100rem;
     margin-top: 20em;
     transform: perspective(20rem) rotateX(45deg) scale(2); */
-    height: 100vh;
+    height: 100%;
     margin: 30rem 0 0 -50%;
     transform: var(--perspective);
     width: 200vw;
@@ -282,7 +282,7 @@ body {
 
 .graph--tropical .image {
     background-image: url("../../assets/img/track-tropical.png");
-    background-position: center 25%;
+    background-position: center 3rem;
 }
 
 .graph--tropical .lines {
@@ -295,7 +295,7 @@ body {
 
 .graph--mountain .image {
     background-image: url("../../assets/img/track-mountain.png");
-    background-position: 50% 25%;
+    background-position: 50% 8rem;
 }
 
 .graph--mountain .lines {
@@ -325,7 +325,7 @@ body {
     top: 0;
     left: 0;
     background: linear-gradient(180deg, transparent, var(--green3));
-    height: 100vh;
+    height: 100%;
     margin: 30rem 0 0 45rem;
     width: 14rem;
     left: -.8rem;
@@ -334,15 +334,15 @@ body {
 }
 
 .paths--1 {
-    transform: var(--perspectiveGame) translateY(-60rem) translateX(0);
+    transform: var(--perspectiveGame) translateY(-34rem) translateX(0);
 }
 
 .paths--2 {
-    transform: var(--perspectiveGame) translateY(-60rem) translateX(-16rem);
+    transform: var(--perspectiveGame) translateY(-34rem) translateX(-16rem);
 }
 
 .paths--3 {
-    transform: var(--perspectiveGame) translateY(-60rem) translateX(16rem);
+    transform: var(--perspectiveGame) translateY(-34rem) translateX(16rem);
 }
 
 .menu {
