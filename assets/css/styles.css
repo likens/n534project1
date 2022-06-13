@@ -658,7 +658,7 @@ body {
     background-position: center 1rem;
 }
 
-.menu--track .menu__start:after {
+.menu--track .game__start:after {
     content: '';
     position: absolute;
     top: 0;
