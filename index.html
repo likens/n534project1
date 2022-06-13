@@ -52,7 +52,7 @@
                                     <option>Mountain Madness</option>
                                     <option>Tropical Trouble</option>
                                     <option>Sunset Journey</option>
-                                    <option>Desert Drive</option>
+                                    <!-- <option>Desert Drive</option> -->
                                 </select>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                             <li class="leaderboard__item">
                                 <div class="leaderboard__rank">4</div>
                                 <div class="leaderboard__name">Lightman</div>
-                                <div class="leaderboard__team">Colemak</div>
+                                <div class="leaderboard__team">Qwerty</div>
                                 <div class="leaderboard__score">70000</div>
                             </li>
                             <li class="leaderboard__item">
@@ -108,7 +108,7 @@
                             <li class="leaderboard__item">
                                 <div class="leaderboard__rank">8</div>
                                 <div class="leaderboard__name">POWERGLOVIN</div>
-                                <div class="leaderboard__team">Colemak</div>
+                                <div class="leaderboard__team">Qwerty</div>
                                 <div class="leaderboard__score">30000</div>
                             </li>
                             <li class="leaderboard__item">
@@ -206,7 +206,7 @@
                                         Team Workman
                                     </button>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <button class="menu__next colemak">
                                         <div class="cube">
                                             <div class="one"></div>
@@ -218,7 +218,7 @@
                                         </div>
                                         Team Colemak
                                     </button>
-                                </li>
+                                </li> -->
                                 <li>
                                     <button class="menu__back">&lt; Back</button>
                                 </li>
@@ -319,9 +319,9 @@
                                 <li>
                                     <button class="game__start sunset">Sunset Journey</button>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <button class="game__start desert">Desert Drive</button>
-                                </li>
+                                </li> -->
                                 <li>
                                     <button class="menu__back">&lt; Back</button>
                                 </li>
@@ -367,6 +367,10 @@
                     <div class="lines lines--3"></div>
                     <div class="lines lines--4"></div>
                     <div class="lines lines--5"></div>
+                    <div class="image"></div>
+                    <div class="paths paths--1"></div>
+                    <div class="paths paths--2"></div>
+                    <div class="paths paths--3"></div>
                 </div>
                 <div class="footer">
                     <div class="version">v0.0.1 alpha</div>
@@ -474,12 +478,16 @@
             btnStart.forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.getElementById("statusTrack").innerText = btn.textContent;
+                    let team = document.getElementById("statusRacer").innerText.toLowerCase();
+                    team = team.replace("team ", "");
+                    console.log(team);
                     hideMenus();
                     graph.classList.add("graph--out");
                     setTimeout(() => {
                         graph.classList.remove("graph--out");
                         graph.classList.add("graph--game");
                         graph.classList.add(`graph--${[...btn.classList][1]}`);
+                        graph.classList.add(`graph--${team.toLowerCase()}`);
                     }, 2000);
                 });
             });

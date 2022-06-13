@@ -3,14 +3,18 @@
     --black: rgba(0,0,0,1);
     --blue1: rgba(54, 99, 248, .35);
     --blue2: rgba(54, 99, 248, 1);
+    --blue3: rgba(54, 99, 248, .7);
     --purple1: rgba(209, 54, 248, .35);
     --purple2: rgba(209, 54, 248, 1);
     --green1: rgba(22, 240, 95, .35);
     --green2: rgba(22, 240, 95, 1);
+    --green3: rgba(22, 240, 95, .7);
     --red1: rgba(240, 36, 0, .35);
     --red2: rgba(240, 36, 0, 1);
+    --red3: rgba(240, 36, 0, .7);
     --yellow1: rgba(255, 249, 84, .35);
     --yellow2: rgba(255, 249, 84, 1);
+    --yellow3: rgba(255, 249, 84, .7);
     --orange1: rgba(234, 159, 20, .5);
     --orange2: rgba(234, 159, 20, 1);
     --tan1: rgba(210, 180, 140, .5);
@@ -18,7 +22,7 @@
     --ice1: rgba(44, 206, 225, 0.5);
     --ice2: rgba(44, 206, 225, 1);
     --olive1: rgba(122, 197, 0, 0.5);
-    --olive2: rgba(122, 197, 0, 1);
+    --olive2: #7ac500;
     --lines: var(--green1);
     --text: var(--green2);
     /* --perspective: perspective(30rem) rotateX(40deg) scale(2); */
@@ -86,6 +90,7 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     width: 1024px;
+    min-width: 1024px;
     height: 768px;
     grid-gap: 5rem;
     align-items: flex-start;
@@ -167,7 +172,7 @@ body {
 
 .lines {
     position: absolute;
-    z-index: -1;
+    z-index: -2;
     top: 0;
     left: 0;
     background: linear-gradient(180deg, var(--transparent) 0px, var(--lines) 0%, var(--lines) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--lines) 0%, var(--lines) 3px, var(--transparent) 0px); 
@@ -210,7 +215,9 @@ body {
     transform: var(--perspective) translateY(-200%);
 }
 
-.graph--out .lines {
+.graph--out .image,
+.graph--out .lines,
+.graph--out .paths {
     opacity: 0;
 }
 
@@ -219,10 +226,29 @@ body {
     height: 100%;
 }
 
+.graph--game .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -1;
+    transition: opacity 2s ease;
+    opacity: 1;
+}
+
 .graph--game .lines {
     animation-duration: 10s;
     width: 112.4rem;
     margin-left: -5rem;
+    z-index: 1;
+}
+
+.graph--game .paths {
+    opacity: 1;
 }
 
 .graph--game .lines--1 {
@@ -254,27 +280,70 @@ body {
     background-image: linear-gradient(180deg, var(--transparent) 0px, var(--tan1) 0%, var(--tan1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--tan1) 0%, var(--tan1) 3px, var(--transparent) 0px); 
 }
 
+.graph--tropical .image {
+    background-image: url("../../assets/img/track-tropical.png");
+    background-position: center 25%;
+}
+
 .graph--tropical .lines {
-    background-image: linear-gradient(180deg, var(--transparent) 0px, var(--olive1) 0%, var(--olive1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--olive1) 0%, var(--olive1) 3px, var(--transparent) 0px); 
+    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .5) 0px); 
+}
+
+.graph--mountain .image {
+    background-image: url("../../assets/img/track-mountain.png");
+    background-position: 50% 25%;
 }
 
 .graph--mountain .lines {
-    background-image: linear-gradient(180deg, var(--transparent) 0px, var(--ice1) 0%, var(--ice1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--ice1) 0%, var(--ice1) 3px, var(--transparent) 0px); 
+    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--ice1) 0%, var(--ice1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--ice1) 0%, var(--ice1) 3px, rgba(0,0,0, .5) 0px); 
+}
+
+.graph--sunset .image {
+    background-image: url("../../assets/img/track-sunset.png");
+    background-position: 2rem 0;
 }
 
 .graph--sunset .lines {
-    background-image: linear-gradient(180deg, var(--transparent) 0px, var(--orange1) 0%, var(--orange1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--orange1) 0%, var(--orange1) 3px, var(--transparent) 0px); 
+    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .5) 0px); 
 }
 
-/* .mountain {
+.paths {
     position: absolute;
+    z-index: 2;
     top: 0;
-    left: 50%;
-    height: 50%;
-    min-width: 100vw;
-    transform: translateX(-50%);
-    opacity: .25;
-} */
+    left: 0;
+    background: linear-gradient(180deg, transparent, var(--green3));
+    height: 100vh;
+    margin: 30rem 0 0 45rem;
+    width: 14rem;
+    left: -.8rem;
+    opacity: 0;
+    transition: opacity 4s ease;
+}
+
+.paths--1 {
+    transform: var(--perspectiveGame) translateY(-60rem) translateX(0);
+}
+
+.paths--2 {
+    transform: var(--perspectiveGame) translateY(-60rem) translateX(-16rem);
+}
+
+.paths--3 {
+    transform: var(--perspectiveGame) translateY(-60rem) translateX(16rem);
+}
+
+.graph--qwerty .paths {
+    background: linear-gradient(180deg, transparent, var(--blue3));
+}
+
+.graph--dvorak .paths {
+    background: linear-gradient(180deg, transparent, var(--yellow3));
+}
+
+.graph--workman .paths {
+    background: linear-gradient(180deg, transparent, var(--red3));
+}
 
 .menu {
     text-align: center;
@@ -294,7 +363,9 @@ body {
 }
 
 .menu--racer ul {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 .menu--row ul {
@@ -309,18 +380,20 @@ body {
 
 /* .menu--mode ul {
     grid-template-columns: repeat(3, 1fr);
-}
+} */
 
 .menu--track ul {
     grid-template-columns: repeat(3, 1fr);
-} */
+    max-width: 90%;
+    margin: 0 auto;
+}
 
 .leaderboard__select,
 .menu button {
     font-family: 'M42';
     /* font-family: '04b31'; */
     color: var(--text);
-    background: rgba(0,0,0, .5);
+    background-color: rgba(0,0,0, .5);
     border: 2px solid var(--text);
     padding: 2rem 2rem 1.5rem;
     text-transform: uppercase;
@@ -348,7 +421,7 @@ body {
 .leaderboard__select:hover,
 .menu button:hover {
     box-shadow: var(--glow) var(--green1);
-    background: var(--green1);
+    background-color: var(--green1);
 }
 
 .leaderboard__select:before,
@@ -429,6 +502,7 @@ body {
 
 .menu--racer button {
     padding: 3rem 2rem 2rem;
+    line-height: 1.5;
 }
 
 .menu--racer .qwerty {
@@ -557,19 +631,43 @@ body {
     color: var(--tan2);
 }
 
+.menu--track .game__start {
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .menu--track .mountain {
     border-color: var(--ice2);
     color: var(--ice2);
+    background-image: url(../../assets/img/track-mountain.png);
+    background-position: center 2rem;
 }
 
 .menu--track .sunset {
     border-color: var(--orange2);
     color: var(--orange2);
+    background-image: url(../../assets/img/track-sunset.png);
+    background-position: center -1rem;
 }
 
 .menu--track .tropical {
     border-color: var(--olive2);
     color: var(--olive2);
+    background-image: url(../../assets/img/track-tropical.png);
+    background-position: center 1rem;
+}
+
+.menu--track .sunset:after,
+.menu--track .tropical:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: -1;
 }
 
 .menu--track .desert:hover {
@@ -579,17 +677,17 @@ body {
 
 .menu--track .mountain:hover {
     box-shadow: var(--glow) var(--ice1);
-    background: var(--ice1);
+    background-color: var(--ice1);
 }
 
 .menu--track .sunset:hover {
     box-shadow: var(--glow) var(--orange1);
-    background: var(--orange1);
+    background-color: var(--orange1);
 }
 
 .menu--track .tropical:hover {
     box-shadow: var(--glow) var(--olive1);
-    background: var(--olive1);
+    background-color: var(--olive1);
 }
 
 .menu--track .desert:before {
@@ -626,6 +724,11 @@ body {
         var(--olive1),
         transparent
     );
+}
+
+.menu--track .game__start {
+    height: 12rem;
+    line-height: 1.5;
 }
 
 .menu--skill .emoticon {
@@ -881,19 +984,6 @@ body {
 @keyframes game4 {
     from { transform: var(--perspectiveGame) translateY(-200%) }
     to { transform: var(--perspectiveGame) translateY(-100%) }
-}
-
-
-
-
-@keyframes fadeInLeft { 
-    0% {opacity:0;transform:translateX(-100vw);}
-    100% {opacity:1;transform:translateX(0);}
-}
-
-@keyframes fadeOutRight {
-    0% {opacity:1;transform:translateX(0);}
-    100% {opacity:0;transform:translateX(100vw);}
 }
 
 @keyframes zoomInCenter { 
