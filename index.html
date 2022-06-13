@@ -19,40 +19,125 @@
                         <div class="leaderboard__title">Leaderboards</div>
                         <div class="leaderboard__selection">
                             <div class="leaderboard__type">
-                                <button class="leaderboard__prev">&lt;</button>
-                                <div class="leaderboard__current">Global</div>
-                                <button class="leaderboard__next">&gt;</button>
+                                <div class="leaderboard__cat">Locale</div>
+                                <select class="leaderboard__select leaderboard__locale" id="ddlLocale">
+                                    <option>Global</option>
+                                    <option>Friends</option>
+                                    <option>Continent</option>
+                                    <option>Country</option>
+                                    <option>State/Province</option>
+                                    <option>City</option>
+                                </select>
                             </div>
                             <div class="leaderboard__type">
-                                <button class="leaderboard__prev">&lt;</button>
-                                <div class="leaderboard__current">Home Row</div>
-                                <button class="leaderboard__next">&gt;</button>
+                                <div class="leaderboard__cat">Key Row</div>
+                                <select class="leaderboard__select leaderboard__row" id="ddlRow">
+                                    <option>Home Row</option>
+                                    <option>Top Row</option>
+                                    <option>Bottom Row</option>
+                                </select>
                             </div>
                             <div class="leaderboard__type">
-                                <button class="leaderboard__prev">&lt;</button>
-                                <div class="leaderboard__current">Easy</div>
-                                <button class="leaderboard__next">&gt;</button>
+                                <div class="leaderboard__cat">Difficulty</div>
+                                <select class="leaderboard__select leaderboard__skill" id="ddlSkill">
+                                    <option>Easy</option>
+                                    <option>Normal</option>
+                                    <option>Hard</option>
+                                    <option>Extreme</option>
+                                </select>
                             </div>
                             <div class="leaderboard__type">
-                                <button class="leaderboard__prev">&lt;</button>
-                                <div class="leaderboard__current">Mountain Madness</div>
-                                <button class="leaderboard__next">&gt;</button>
+                                <div class="leaderboard__cat">Track</div>
+                                <select class="leaderboard__select leaderboard__track" id="ddlTrack">
+                                    <option>Mountain Madness</option>
+                                    <option>Tropical Trouble</option>
+                                    <option>Sunset Journey</option>
+                                    <option>Desert Drive</option>
+                                </select>
                             </div>
                         </div>
                         <ul class="leaderboard__table" id="leaderboardTable">
-                            <li class="leaderboard__row">
+                            <li class="leaderboard__item leaderboard__item--header">
+                                <div class="leaderboard__column">Rank</div>
+                                <div class="leaderboard__column">Name</div>
+                                <div class="leaderboard__column">Team</div>
+                                <div class="leaderboard__column">Score</div>
+                            </li>
+                            <li class="leaderboard__item">
                                 <div class="leaderboard__rank">1</div>
-                                <div class="leaderboard__team"></div>
-                                <div class="leaderboard__name">tehRAGE</div>
+                                <div class="leaderboard__name">Parzival</div>
+                                <div class="leaderboard__team">Qwerty</div>
+                                <div class="leaderboard__score">100000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">2</div>
+                                <div class="leaderboard__name">Flynn</div>
+                                <div class="leaderboard__team">Dvorak</div>
+                                <div class="leaderboard__score">90000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">3</div>
+                                <div class="leaderboard__name">MADDMAXX</div>
+                                <div class="leaderboard__team">Workman</div>
+                                <div class="leaderboard__score">80000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">4</div>
+                                <div class="leaderboard__name">Lightman</div>
+                                <div class="leaderboard__team">Colemak</div>
+                                <div class="leaderboard__score">70000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">5</div>
+                                <div class="leaderboard__name">NEO</div>
+                                <div class="leaderboard__team">Qwerty</div>
+                                <div class="leaderboard__score">60000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">6</div>
+                                <div class="leaderboard__name">MacReady</div>
+                                <div class="leaderboard__team">Dvorak</div>
+                                <div class="leaderboard__score">50000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">7</div>
+                                <div class="leaderboard__name">MyNameDoesntFi</div>
+                                <div class="leaderboard__team">Workman</div>
+                                <div class="leaderboard__score">40000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">8</div>
+                                <div class="leaderboard__name">POWERGLOVIN</div>
+                                <div class="leaderboard__team">Colemak</div>
+                                <div class="leaderboard__score">30000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">9</div>
+                                <div class="leaderboard__name">Bob</div>
+                                <div class="leaderboard__team">Qwerty</div>
+                                <div class="leaderboard__score">20000</div>
+                            </li>
+                            <li class="leaderboard__item">
+                                <div class="leaderboard__rank">10</div>
+                                <div class="leaderboard__name">DOOMGUY</div>
+                                <div class="leaderboard__team">Dvorak</div>
+                                <div class="leaderboard__score">10000</div>
                             </li>
                         </ul>
-                        <div class="leaderboard__back">
-                            <button class="leaderboard__btn">&lt; Back</button>
+                        <div class="leaderboard__back menu__back-btn">
+                            <button class="leaderboard__btn menu__btn">&lt; Back</button>
+                        </div>
+                    </div>
+                    <div class="how menu hide" id="how">
+                        <div class="how__title">How To Play</div>
+                        <div class="how__content">Something will go here</div>
+                        <div class="how__back menu__back-btn">
+                            <button class="how__btn menu__btn">&lt; Back</button>
                         </div>
                     </div>
                     <div class="story menu hide" id="menuStory">
-                        <div class="story__title">in the far future of virtual worlds...</div>
-                        <div class="story__content">Professional racing is no longer done with cars, but completed by those who can type on a physical keyboard the fastest. You’ve proven to be the best touch-typist from your virtual club and are entered into an amateur league to represent your peers. Do you have what it takes to climb the ranks, reach the top, and become a legendary type racer?</div>
+                        <div class="story__title">In the far future of virtual worlds...</div>
+                        <div class="story__content">Professional racing is no longer done with cars, but completed by those who can type on a physical keyboard the fastest. You've proven to be the best touch-typist from your virtual club and are entered into an amateur league to represent your peers. Do you have what it takes to climb the ranks, reach the top, and become a legendary type racer?</div>
                         <div class="story__next">
                             <button class="menu__next">Let's Do This !</button>
                         </div>
@@ -67,10 +152,10 @@
                                     <button class="menu__next">Start</button>
                                 </li>
                                 <li>
-                                    <button>How To Play</button>
+                                    <button class="menu__btn">How To Play</button>
                                 </li>
                                 <li>
-                                    <button class="leaderboard__btn">Leaderboards</button>
+                                    <button class="menu__btn">Leaderboards</button>
                                 </li>
                                 <li>
                                     <button>Reset</button>
@@ -294,6 +379,17 @@
                     <div id="statusTrack"></div>
                 </div>
                 <div class="scanlines"></div>
+                <!-- <div class="audio">
+                    <audio id="audHover" autoplay="false">
+                        <source src="./assets/audio/button_hover.mp3"></source>
+                    </audio>
+                    <audio id="audNext" autoplay="false">
+                        <source src="./assets/audio/button_next.mp3"></source>
+                    </audio>
+                    <audio id="audBack" autoplay="false">
+                        <source src="./assets/audio/button_back.mp3"></source>
+                    </audio>
+                </div> -->
             </div>
         </div>
     </body>
@@ -313,8 +409,6 @@
             const leaderboardSkill = ["Easy", "Normal", "Hard", "Extreme"];
             const leaderboardTrack = ["Mountain Madness", "Tropical Trouble", "Sunset Journey", "Desert Drive"];
 
-
-
             let menuIndex = 0;
             const menuStructure = ["begin", "story", "racer", "row", "skill", "track", "game"];
             const menus = [...document.getElementsByClassName("menu")];
@@ -322,11 +416,22 @@
             const btnNext = [...document.getElementsByClassName("menu__next")];
             const btnBack = [...document.getElementsByClassName("menu__back")];
             const btnStart = [...document.getElementsByClassName("game__start")];
-            const btnLeaderboard = [...document.getElementsByClassName("leaderboard__btn")];
+            const btnMenu = [...document.getElementsByClassName("menu__btn")];
 
-            btnLeaderboard.forEach(btn => {
+            const audHover = document.getElementById("audHover");
+            const audNext = document.getElementById("audNext");
+            const audBack = document.getElementById("audBack");
+
+            btnMenu.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    leaderboard.classList.toggle(hide);
+                    if (btn.textContent === "Leaderboards") {
+                        leaderboard.classList.toggle(hide);
+                    } else if (btn.textContent === "How To Play") {
+                        how.classList.toggle(hide);
+                    } else {
+                        leaderboard.classList.add(hide);
+                        how.classList.add(hide);
+                    }
                     document.getElementById("menuBegin").classList.toggle(hide);
                     toggleTitle();
                 });
@@ -341,7 +446,14 @@
                     hideMenus();
                     item = menuStructure[menuIndex];
                     showMenu(item);
+                    // resetHover();
+                    // playNext();
                 });
+                // btn.addEventListener('mouseenter', function() {
+                //     console.log("got here");
+                //     resetHover();
+                //     audHover.play();
+                // });
             });
 
             btnBack.forEach(btn => {
@@ -353,6 +465,9 @@
                     item = menuStructure[menuIndex];
                     updateStatus(item, "");
                     showMenu(item);
+                    audBack.pause();
+                    audBack.currentTime = 0;
+                    audBack.play();
                 });
             });
 
@@ -390,6 +505,18 @@
 
             function hideMenus() {
                 menus.forEach(menu => menu.classList.add(hide));
+            }
+
+            function resetHover() {
+                audHover.pause();
+                audHover.currentTime = 0;
+            }
+
+            function playNext() {
+                resetHover();
+                audNext.pause();
+                audNext.currentTime = 0;
+                audNext.play();
             }
 
         });

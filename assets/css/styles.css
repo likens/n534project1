@@ -113,6 +113,7 @@ body {
     grid-gap: 3rem;
 }
 
+.how__title,
 .leaderboard__title,
 .story__title {
     opacity: 0;
@@ -126,6 +127,7 @@ body {
     font-style: italic;
 }
 
+.how__content,
 .story__content {
     opacity: 0;
     animation: zoomInCenter 1s ease forwards;
@@ -143,6 +145,7 @@ body {
     animation-delay: .5s;
 }
 
+.how__back,
 .leaderboard__back,
 .story__back {
     opacity: 0;
@@ -312,6 +315,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
 } */
 
+.leaderboard__select,
 .menu button {
     font-family: 'M42';
     /* font-family: '04b31'; */
@@ -332,7 +336,7 @@ body {
     width: 100%;
 }
 
-.leaderboard .leaderboard__btn, 
+.menu__back-btn .menu__btn, 
 .menu .menu__back {
     min-width: 10rem;
     width: auto;
@@ -341,12 +345,14 @@ body {
     padding-top: 2rem;
 }
 
+.leaderboard__select:hover,
 .menu button:hover {
     box-shadow: var(--glow) var(--green1);
     background: var(--green1);
 }
 
-.menu button:before{
+.leaderboard__select:before,
+.menu button:before {
     content: '';
     position: absolute;
     top: 0;
@@ -362,7 +368,8 @@ body {
     );
     transition: all .5s;
 }
-  
+
+.laderboard__select:hover:before,
 .menu button:hover:before {
     transform: translateX(100%);
 }
@@ -398,6 +405,26 @@ body {
 
 .menu li:nth-child(6) {
     animation-delay: .7s;
+}
+
+.menu li:nth-child(7) {
+    animation-delay: .8s;
+}
+
+.menu li:nth-child(8) {
+    animation-delay: .9s;
+}
+
+.menu li:nth-child(9) {
+    animation-delay: 1s;
+}
+
+.menu li:nth-child(10) {
+    animation-delay: 1.1s;
+}
+
+.menu li:nth-child(11) {
+    animation-delay: 1.2s;
 }
 
 .menu--racer button {
@@ -645,17 +672,12 @@ body {
 }
 
 .leaderboard__selection {
-    padding: 4rem 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 5rem;
-}
-
-.leaderboard__type {
-    display: grid;
-    grid-template-columns: .2fr .6fr .2fr;
-    align-items: center;
-    grid-gap: 1rem;
+    opacity: 0;
+    padding: 3rem 0;
+    display: flex;
+    grid-gap: 4rem;
+    animation: zoomInCenter 1s ease forwards;
+    animation-delay: .1s;
 }
 
 .leaderboard__type button {
@@ -666,6 +688,58 @@ body {
 .leaderboard__current {
     font-size: 2rem;
     font-variant: small-caps;
+}
+
+.leaderboard__select {
+    font-family: 'Retro Gaming';
+    text-transform: none;
+    font-variant: small-caps;
+    width: auto;
+    font-size: 1.8rem;
+    padding: 1rem 1rem .5rem;
+    min-width: 18rem;
+}
+
+.leaderboard__select:focus-visible,
+.leaderboard__select:focus {
+    outline: 0;
+    background: none;
+    color: forestgreen;
+}
+
+.leaderboard__cat {
+    font-family: 'M42';
+    color: var(--text);
+    transform: skew(-20deg);
+    padding: 0 0 1rem;
+}
+
+.leaderboard .leaderboard__table {
+    padding: 1rem 0 2rem;
+    grid-gap: 1rem;
+}
+
+.leaderboard__item {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    font-size: 1.8rem;
+    font-variant: small-caps;
+}
+
+.leaderboard__item--header .leaderboard__column {
+    font-family: 'M42';
+    transform: skew(-20deg);
+    font-size: 1.2rem;
+    font-variant: normal;
+    padding: 0 0 1rem;
+}
+
+.leaderboard__rank {
+    font-size: 2rem;
+}
+
+.leaderboard__back {
+    animation-delay: 1.3s;
 }
 
 .scanlines {
