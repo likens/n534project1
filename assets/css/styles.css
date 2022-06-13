@@ -289,6 +289,10 @@ body {
     background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .5) 0px); 
 }
 
+.graph--tropical .paths {
+    background: linear-gradient(180deg, transparent, var(--olive1));
+}
+
 .graph--mountain .image {
     background-image: url("../../assets/img/track-mountain.png");
     background-position: 50% 25%;
@@ -298,6 +302,10 @@ body {
     background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--ice1) 0%, var(--ice1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--ice1) 0%, var(--ice1) 3px, rgba(0,0,0, .5) 0px); 
 }
 
+.graph--mountain .paths {
+    background: linear-gradient(180deg, transparent, var(--ice1));
+}
+
 .graph--sunset .image {
     background-image: url("../../assets/img/track-sunset.png");
     background-position: 2rem 0;
@@ -305,6 +313,10 @@ body {
 
 .graph--sunset .lines {
     background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .5) 0px); 
+}
+
+.graph--sunset .paths {
+    background: linear-gradient(180deg, transparent, var(--orange1));
 }
 
 .paths {
@@ -331,18 +343,6 @@ body {
 
 .paths--3 {
     transform: var(--perspectiveGame) translateY(-60rem) translateX(16rem);
-}
-
-.graph--qwerty .paths {
-    background: linear-gradient(180deg, transparent, var(--blue3));
-}
-
-.graph--dvorak .paths {
-    background: linear-gradient(180deg, transparent, var(--yellow3));
-}
-
-.graph--workman .paths {
-    background: linear-gradient(180deg, transparent, var(--red3));
 }
 
 .menu {
