@@ -193,6 +193,7 @@ body {
     border-width: 0 4rem;
     border-style: solid;
     border-color: transparent;
+    pointer-events: none;
 }
 
 .lines--1 {
@@ -219,7 +220,7 @@ body {
     transform: var(--perspective) translateY(-200%);
 }
 
-.graph--out .image,
+.graph--out .track,
 .graph--out .lines,
 .graph--out .paths {
     opacity: 0;
@@ -228,9 +229,11 @@ body {
 .graph--game {
     width: 100%;
     height: 100%;
+    opacity: 1;
 }
 
-.graph--game .image {
+.graph--game .track {
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -245,14 +248,29 @@ body {
 }
 
 .graph--game .lines {
-    animation-duration: 10s;
     width: 112.4rem;
     margin-left: -5rem;
     z-index: 1;
 }
 
+.graph--easy .lines {
+    animation-duration: 10s;
+}
+
+.graph--normal .lines {
+    animation-duration: 7s;
+}
+
+.graph--hard .lines {
+    animation-duration: 4s;
+}
+
+.graph--expert .lines {
+    animation-duration: 1.5s;
+}
+
 .graph--game .paths {
-    opacity: 1;
+    opacity: .5;
 }
 
 .graph--game .lines--1 {
@@ -281,16 +299,16 @@ body {
 }
 
 .graph--desert .lines {
-    background-image: linear-gradient(180deg, var(--transparent) 0px, var(--tan1) 0%, var(--tan1) 3px, var(--transparent) 0px), linear-gradient(90deg, var(--transparent) 0px, var(--tan1) 0%, var(--tan1) 3px, var(--transparent) 0px); 
+    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--tan1) 0%, var(--tan1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--tan1) 0%, var(--tan1) 3px, rgba(0,0,0, .5) 0px); 
 }
 
-.graph--tropical .image {
+.graph--tropical .track {
     background-image: url("../../assets/img/track-tropical2.png");
     background-position: 0 5rem;
 }
 
 .graph--tropical .lines {
-    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .5) 0px); 
+    background-image: linear-gradient(180deg, rgba(0,0,0, .75) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .75) 0px), linear-gradient(90deg, rgba(0,0,0, .75) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .75) 0px); 
     border-color: var(--olive1);
 }
 
@@ -298,7 +316,7 @@ body {
     background: linear-gradient(180deg, transparent, var(--olive1));
 }
 
-.graph--mountain .image {
+.graph--mountain .track {
     background-image: url("../../assets/img/track-mountain2.png");
     background-position: 0 14.8rem;
 }
@@ -312,18 +330,22 @@ body {
     background: linear-gradient(180deg, transparent, var(--ice1));
 }
 
-.graph--sunset .image {
+.graph--sunset .track {
     background-image: url("../../assets/img/track-sunset.png");
     background-position: 2rem 0;
 }
 
 .graph--sunset .lines {
-    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .5) 0px); 
+    background-image: linear-gradient(180deg, rgba(0,0,0, .75) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .75) 0px), linear-gradient(90deg, rgba(0,0,0, .75) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .75) 0px); 
     border-color: var(--orange1);
 }
 
 .graph--sunset .paths {
     background: linear-gradient(180deg, transparent, var(--orange1));
+}
+
+.graph--game .racer {
+
 }
 
 .paths {
@@ -338,6 +360,7 @@ body {
     left: -.8rem;
     opacity: 0;
     transition: opacity 4s ease;
+    pointer-events: none;
 }
 
 .paths--1 {
@@ -396,7 +419,8 @@ body {
 }
 
 .leaderboard__select,
-.menu button {
+.menu button,
+.racer__prompt {
     font-family: 'M42';
     /* font-family: '04b31'; */
     color: var(--text);
@@ -426,13 +450,15 @@ body {
 }
 
 .leaderboard__select:hover,
-.menu button:hover {
+.menu button:hover,
+.racer__prompt:hover {
     box-shadow: var(--glow) var(--green1);
     background-color: var(--green1);
 }
 
 .leaderboard__select:before,
-.menu button:before {
+.menu button:before,
+.racer__prompt:before {
     content: '';
     position: absolute;
     top: 0;
@@ -450,7 +476,8 @@ body {
 }
 
 .laderboard__select:hover:before,
-.menu button:hover:before {
+.menu button:hover:before,
+.racer__prompt:hover:before {
     transform: translateX(100%);
 }
 
@@ -517,6 +544,7 @@ body {
     max-width: 100%;
     transform: skew(20deg);
     margin-top: -1rem;
+    pointer-events: none;
 }
 
 .menu--racer .alpha {
@@ -539,7 +567,7 @@ body {
     color: var(--purple2);
 }
 
-.menu--racer .alpha .cube > div {
+/* .menu--racer .alpha .cube > div {
     border-color: var(--blue2);
     background: var(--blue1);
 }
@@ -557,7 +585,7 @@ body {
 .menu--racer .colemak .cube > div {
     border-color: var(--purple2);
     background: var(--purple1);
-}
+} */
 
 .menu--racer .alpha:hover {
     box-shadow: var(--glow) var(--blue1);
@@ -870,6 +898,160 @@ body {
     animation-delay: 1.3s;
 }
 
+.racer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+}
+
+.racer__img {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(15rem);
+    z-index: 10;
+    opacity: 0;
+}
+
+.graph--game .racer__img {
+    animation: racerStart 2s ease forwards;
+    animation-delay: 1s;
+    /* left: 50%;
+    margin-left: -8.6rem; */
+}
+
+.racer__img--mid {
+    left: 50%;
+    margin-left: -8.6rem;
+}
+
+.racer__img--right {
+    right: 12rem;
+}
+
+.racer__img--left {
+    left: 12rem;
+}
+
+.racer__prompt {
+    position: absolute;
+    bottom: 0;
+    max-width: 8rem;
+    text-align: center;
+    font-size: 2rem;
+    z-index: 5;
+    background-color: rgba(0,0,0, .75);
+    opacity: 0;
+    transition: none;
+}
+
+.graph--game .racer__prompt--left {
+    left: 0;
+    animation: promptLeft 1s ease forwards;
+    animation-delay: 2.7s;
+}
+
+.graph--game .racer__prompt--right {
+    right: 0;
+    animation: promptRight 1s ease forwards;
+    animation-delay: 2.7s;
+}
+
+.graph--alpha .racer__prompt {
+    border-color: var(--blue2);
+    color: var(--blue2);
+}
+
+.graph--alpha .racer__prompt--active {
+    box-shadow: var(--glow) var(--blue1);
+    background: var(--blue1);
+}
+
+.graph--alpha .racer__prompt:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--blue1),
+        transparent
+    );
+}
+
+.graph--delta .racer__prompt {
+    border-color: var(--yellow2);
+    color: var(--yellow2);
+}
+
+.graph--delta .racer__prompt--active {
+    box-shadow: var(--glow) var(--yellow1);
+    background: var(--yellow1);
+}
+
+.graph--delta .racer__prompt:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--yellow1),
+        transparent
+    );
+}
+
+.graph--blaze .racer__prompt {
+    border-color: var(--red2);
+    color: var(--red2);
+}
+
+.graph--blaze .racer__prompt--active {
+    box-shadow: var(--glow) var(--red1);
+    background: var(--red1);
+}
+
+.graph--blaze .racer__prompt:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--red1),
+        transparent
+    );
+}
+
+.racer--ready .racer__img {
+    transform: translateY(-8rem);
+    animation: none;
+}
+
+.racer--ready .racer__prompt--left {
+    opacity: 1;
+    transform:translate(32rem, -9rem) skew(20deg);
+    animation: none;
+}
+
+.racer--ready .racer__prompt--right {
+    opacity: 1;
+    transform:translate(-32rem, -9rem) skew(-20deg);
+    animation: none;
+}
+
+.racer--left .racer__img--left,
+.racer--left .racer__prompt--right,
+.racer--mid .racer__img--mid,
+.racer--right .racer__prompt--left,
+.racer--right .racer__img--right {
+    opacity: 1;
+}
+
+.racer--left .racer__prompt--left,
+.racer--right .racer__prompt--right {
+    opacity: 0;
+}
+
+.racer--left .racer__prompt--right {
+    transform:translate(-62rem, -9rem) skew(-20deg);
+}
+.racer--right .racer__prompt--left {
+    transform:translate(62rem, -9rem) skew(20deg);
+}
+
 .scanlines {
     position: absolute;
     overflow: hidden;
@@ -1014,4 +1196,19 @@ body {
 @keyframes zoomInCenter { 
     0% {opacity:0;transform:scale(0);}
     100% {opacity:1;transform:scale(1);}
+}
+
+@keyframes racerStart { 
+    0% {transform:translateY(15rem);}
+    100% {transform:translateY(-8rem);}
+}
+
+@keyframes promptLeft { 
+    0% {opacity:0;transform:translate(50rem, -9rem) skew(20deg);}
+    100% {opacity:1;transform:translate(32rem, -9rem) skew(20deg);}
+}
+
+@keyframes promptRight { 
+    0% {opacity:0;transform:translate(-50rem, -9rem) skew(-20deg);}
+    100% {opacity:1;transform:translate(-32rem, -9rem) skew(-20deg);}
 }

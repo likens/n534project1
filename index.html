@@ -167,7 +167,7 @@
                                 <li>
                                     <button class="menu__next alpha">
                                         <div class="car">
-                                            <img src="assets/img/racer_blue.gif" alt="" />
+                                            <img src="./assets/img/alpha_spin.gif" alt="" />
                                         </div>
                                         Alpha
                                     </button>
@@ -175,7 +175,7 @@
                                 <li>
                                     <button class="menu__next delta">
                                         <div class="car">
-                                            <img src="assets/img/racer_yellow.gif" alt="" />
+                                            <img src="./assets/img/delta_spin.gif" alt="" />
                                         </div>
                                         Delta
                                     </button>
@@ -183,7 +183,7 @@
                                 <li>
                                     <button class="menu__next blaze">
                                         <div class="car">
-                                            <img src="assets/img/racer_red.gif" alt="" />
+                                            <img src="./assets/img/blaze_spin.gif" alt="" />
                                         </div>
                                         Blaze
                                     </button>
@@ -348,10 +348,17 @@
                     <div class="lines lines--3"></div>
                     <div class="lines lines--4"></div>
                     <div class="lines lines--5"></div>
-                    <div class="image"></div>
+                    <div class="track"></div>
                     <div class="paths paths--1"></div>
                     <div class="paths paths--2"></div>
                     <div class="paths paths--3"></div>
+                    <div class="racer racer--mid" id="racer">
+                        <button class="racer__prompt racer__prompt--left" id="promptLeft">Q</button>
+                        <img src="./assets/img/blaze_left.png" id="imgRacerLeft" class="racer__img racer__img--left" alt="" />
+                        <img src="./assets/img/blaze_mid.png" id="imgRacerMid" class="racer__img racer__img--mid" alt="" />
+                        <img src="./assets/img/blaze_right.png" id="imgRacerRight" class="racer__img racer__img--right" alt="" />
+                        <button class="racer__prompt racer__prompt--right" id="promptRight">U</button>
+                    </div>
                 </div>
                 <div class="footer">
                     <div class="version">v0.0.1 alpha</div>
@@ -386,6 +393,7 @@
             const title = document.getElementById("title");
             const graph = document.getElementById("graph");
             const leaderboard = document.getElementById("leaderboard");
+            const racer = document.getElementById("racer");
 
             const hide = "hide";
 
@@ -406,6 +414,20 @@
             const audHover = document.getElementById("audHover");
             const audNext = document.getElementById("audNext");
             const audBack = document.getElementById("audBack");
+
+            const imgRacerLeft = document.getElementById("imgRacerLeft");
+            const imgRacerMid = document.getElementById("imgRacerMid");
+            const imgRacerRight = document.getElementById("imgRacerRight");
+
+            const keysTopRowLeft = ["Q", "W", "E", "R", "T"] ;
+            const keysTopRowRight = ["Y", "U", "I", "O", "P"];
+            const keysHomeRowLeft = ["A", "S", "D", "F", "G",];
+            const keysHomeRowRight = ["H", "J", "K", "L", ";", "'"];
+            const keysBottomRowLeft = ["Z", "X", "C", "V", "B"];
+            const keysBottomRowRight = ["N", "M", ",", ".", "/"];
+
+            let activeRowLeft = [];
+            let activeRowRight = [];
 
             btnMenu.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -450,25 +472,74 @@
                     item = menuStructure[menuIndex];
                     updateStatus(item, "");
                     showMenu(item);
-                    audBack.pause();
-                    audBack.currentTime = 0;
-                    audBack.play();
+                    // audBack.pause();
+                    // audBack.currentTime = 0;
+                    // audBack.play();
                 });
             });
 
             btnStart.forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.getElementById("statusTrack").innerText = btn.textContent;
+                    const car = document.getElementById("statusRacer").innerText.trim().toLowerCase();
+                    const row = document.getElementById("statusRow").textContent.replace(" Row", "").toLowerCase();
+                    const difficulty = document.getElementById("statusSkill").innerText.trim().toLowerCase();
                     hideMenus();
                     graph.classList.add("graph--out");
+                    // load racer image
+                    imgRacerLeft.src = `./assets/img/${car}_left.png`;
+                    imgRacerMid.src = `./assets/img/${car}_mid.png`;
+                    imgRacerRight.src = `./assets/img/${car}_right.png`;
+                    // load row compatibility
+                    if (row === "top") {
+                        activeRowLeft = keysTopRowLeft;
+                        activeRowRight = keysTopRowRight;
+                    } else if (row === "home") {
+                        activeRowLeft = keysHomeRowLeft;
+                        activeRowRight = keysHomeRowRight;
+                    } else if (row === "bottom") {
+                        activeRowLeft = keysBottomRowLeft;
+                        activeRowRight = keysBottomRowRight;
+                    }
                     setTimeout(() => {
                         graph.classList.remove("graph--out");
                         graph.classList.add("graph--game");
                         graph.classList.add(`graph--${[...btn.classList][1]}`);
-                        graph.classList.add(`graph--${document.getElementById("statusRacer").innerText.trim().toLowerCase()}`);
+                        graph.classList.add(`graph--${car}`);
+                        graph.classList.add(`graph--${row}`);
+                        graph.classList.add(`graph--${difficulty}`);
+                        setTimeout(() => {
+                            console.log(racer);
+                            racer.classList.add("racer--ready");
+                        }, 3600);
                     }, 2000);
                 });
             });
+
+            document.addEventListener('keyup', (e) => {
+                if (e.code === "ArrowRight") {
+                    generateRightKey();
+                    if (racer.classList.contains("racer--mid")) {
+                        racer.classList.remove("racer--mid");
+                        racer.classList.add("racer--right");
+                    } else if (racer.classList.contains("racer--left")) {
+                        racer.classList.remove("racer--left");
+                        racer.classList.add("racer--mid");
+                    }
+                } else if (e.code === "ArrowLeft") {
+                    generateLeftKey();
+                    if (racer.classList.contains("racer--mid")) {
+                        racer.classList.remove("racer--mid");
+                        racer.classList.add("racer--left");
+                    } else if (racer.classList.contains("racer--right")) {
+                        racer.classList.remove("racer--right");
+                        racer.classList.add("racer--mid");
+                    }
+                } else if (e.code === "Space") {
+
+                }
+            });
+
 
             function updateStatus(item, text) {
                 const status = document.getElementById(`status${item[0].toUpperCase() + item.slice(1)}`);
@@ -493,16 +564,24 @@
                 menus.forEach(menu => menu.classList.add(hide));
             }
 
-            function resetHover() {
-                audHover.pause();
-                audHover.currentTime = 0;
+            // function resetHover() {
+            //     audHover.pause();
+            //     audHover.currentTime = 0;
+            // }
+
+            // function playNext() {
+            //     resetHover();
+            //     audNext.pause();
+            //     audNext.currentTime = 0;
+            //     audNext.play();
+            // }
+
+            function generateLeftKey() {
+                promptLeft.innerText = activeRowLeft[activeRowLeft.length * Math.random() | 0];
             }
 
-            function playNext() {
-                resetHover();
-                audNext.pause();
-                audNext.currentTime = 0;
-                audNext.play();
+            function generateRightKey() {
+                promptRight.innerText = activeRowRight[activeRowRight.length * Math.random() | 0];
             }
 
         });
