@@ -190,6 +190,9 @@ body {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     transition: opacity 2s ease;
+    border-width: 0 4rem;
+    border-style: solid;
+    border-color: transparent;
 }
 
 .lines--1 {
@@ -282,12 +285,13 @@ body {
 }
 
 .graph--tropical .image {
-    background-image: url("../../assets/img/track-tropical.png");
-    background-position: center 3rem;
+    background-image: url("../../assets/img/track-tropical2.png");
+    background-position: 0 5rem;
 }
 
 .graph--tropical .lines {
     background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--olive1) 0%, var(--olive1) 3px, rgba(0,0,0, .5) 0px); 
+    border-color: var(--olive1);
 }
 
 .graph--tropical .paths {
@@ -295,12 +299,13 @@ body {
 }
 
 .graph--mountain .image {
-    background-image: url("../../assets/img/track-mountain.png");
-    background-position: 50% 8rem;
+    background-image: url("../../assets/img/track-mountain2.png");
+    background-position: 0 14.8rem;
 }
 
 .graph--mountain .lines {
-    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--ice1) 0%, var(--ice1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--ice1) 0%, var(--ice1) 3px, rgba(0,0,0, .5) 0px); 
+    background-image: linear-gradient(180deg, rgba(0,0,0,.9) 0px, var(--ice1) 0%, var(--ice1) 3px, rgba(0,0,0,.9) 0px), linear-gradient(90deg, rgba(0,0,0,.9) 0px, var(--ice1) 0%, var(--ice1) 3px, rgba(0,0,0,.9) 0px);
+    border-color: var(--ice1); 
 }
 
 .graph--mountain .paths {
@@ -314,6 +319,7 @@ body {
 
 .graph--sunset .lines {
     background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--orange1) 0%, var(--orange1) 3px, rgba(0,0,0, .5) 0px); 
+    border-color: var(--orange1);
 }
 
 .graph--sunset .paths {
@@ -502,21 +508,28 @@ body {
 }
 
 .menu--racer button {
-    padding: 3rem 2rem 2rem;
+    padding: 0 2rem 2rem;
     line-height: 1.5;
 }
 
-.menu--racer .qwerty {
+.menu--racer img {
+    display: block;
+    max-width: 100%;
+    transform: skew(20deg);
+    margin-top: -1rem;
+}
+
+.menu--racer .alpha {
     border-color: var(--blue2);
     color: var(--blue2);
 }
 
-.menu--racer .dvorak {
+.menu--racer .delta {
     border-color: var(--yellow2);
     color: var(--yellow2);
 }
 
-.menu--racer .workman {
+.menu--racer .blaze {
     border-color: var(--red2);
     color: var(--red2);
 }
@@ -526,17 +539,17 @@ body {
     color: var(--purple2);
 }
 
-.menu--racer .qwerty .cube > div {
+.menu--racer .alpha .cube > div {
     border-color: var(--blue2);
     background: var(--blue1);
 }
 
-.menu--racer .dvorak .cube > div {
+.menu--racer .delta .cube > div {
     border-color: var(--yellow2);
     background: var(--yellow1);
 }
 
-.menu--racer .workman .cube > div {
+.menu--racer .blaze .cube > div {
     border-color: var(--red2);
     background: var(--red1);
 }
@@ -546,17 +559,17 @@ body {
     background: var(--purple1);
 }
 
-.menu--racer .qwerty:hover {
+.menu--racer .alpha:hover {
     box-shadow: var(--glow) var(--blue1);
     background: var(--blue1);
 }
 
-.menu--racer .dvorak:hover {
+.menu--racer .delta:hover {
     box-shadow: var(--glow) var(--yellow1);
     background: var(--yellow1);
 }
 
-.menu--racer .workman:hover {
+.menu--racer .blaze:hover {
     box-shadow: var(--glow) var(--red1);
     background: var(--red1);
 }
@@ -566,7 +579,7 @@ body {
     background: var(--purple1);
 }
 
-.menu--racer .qwerty:before {
+.menu--racer .alpha:before {
     background: linear-gradient(
         120deg,
         transparent,
@@ -575,7 +588,7 @@ body {
     );
 }
 
-.menu--racer .dvorak:before {
+.menu--racer .delta:before {
     background: linear-gradient(
         120deg,
         transparent,
@@ -584,7 +597,7 @@ body {
     );
 }
 
-.menu--racer .workman:before {
+.menu--racer .blaze:before {
     background: linear-gradient(
         120deg,
         transparent,
@@ -641,8 +654,8 @@ body {
 .menu--track .mountain {
     border-color: var(--ice2);
     color: var(--ice2);
-    background-image: url(../../assets/img/track-mountain.png);
-    background-position: center 2rem;
+    background-image: url(../../assets/img/track-mountain2.png);
+    background-position: -4rem 1rem;
 }
 
 .menu--track .sunset {
@@ -655,8 +668,8 @@ body {
 .menu--track .tropical {
     border-color: var(--olive2);
     color: var(--olive2);
-    background-image: url(../../assets/img/track-tropical.png);
-    background-position: center 1rem;
+    background-image: url(../../assets/img/track-tropical2.png);
+    background-position: center;
 }
 
 .menu--track .game__start:after {
@@ -825,7 +838,7 @@ body {
 .leaderboard__item {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-variant: small-caps;
 }
 
@@ -839,6 +852,18 @@ body {
 
 .leaderboard__rank {
     font-size: 2rem;
+}
+
+.leaderboard__racer--blaze {
+    color: var(--red2);
+}
+
+.leaderboard__racer--alpha {
+    color: var(--blue2);
+}
+
+.leaderboard__racer--delta {
+    color: var(--yellow2);
 }
 
 .leaderboard__back {
