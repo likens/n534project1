@@ -310,7 +310,7 @@ body {
 }
 
 .graph--game .lines--5 {
-    transform: var(--perspectiveGame) translateY(-198%);
+    transform: var(--perspectiveGame) translateY(-202%);
     transition: opacity 2s ease;
 }
 

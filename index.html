@@ -35,6 +35,7 @@
                                     <option>Home Row</option>
                                     <option>Top Row</option>
                                     <option>Bottom Row</option>
+                                    <option>Number Row</option>
                                 </select>
                             </div>
                             <div class="leaderboard__type">
@@ -238,6 +239,12 @@
                                     </button>
                                 </li>
                                 <li>
+                                    <button class="menu__next">
+                                        <img src="./assets/img/row-number.png" alt="" />
+                                        Number Row
+                                    </button>
+                                </li>
+                                <li>
                                     <button class="menu__back">&lt; Back</button>
                                 </li>
                             </ul>
@@ -407,7 +414,7 @@
             const hide = "hide";
 
             const leaderboardCategory = ["Global", "Country", "State", "City", "Friends"];
-            const leaderboardRows = ["Home Row", "Top Row", "Bottom Row"];
+            const leaderboardRows = ["Home Row", "Top Row", "Bottom Row", "Number Row"];
             const leaderboardSkill = ["Easy", "Normal", "Hard", "Extreme"];
             const leaderboardTrack = ["Alpine Access", "City Cruise", "Sunset Stretch", "Tropical Tour"];
 
@@ -434,6 +441,8 @@
             const keysHomeRowRight = ["H", "J", "K", "L", ";", "'"];
             const keysBottomRowLeft = ["Z", "X", "C", "V", "B"];
             const keysBottomRowRight = ["N", "M", ",", ".", "/"];
+            const keysNumberRowLeft = ["`", "1", "2", "3", "4", "5"];
+            const keysNumberRowRight = ["6", "7", "8", "9", "0", "-", "="];
 
             let activeRowLeft = [];
             let activeRowRight = [];
@@ -509,6 +518,9 @@
                     } else if (row === "bottom") {
                         activeRowLeft = keysBottomRowLeft;
                         activeRowRight = keysBottomRowRight;
+                    } else if (row === "number") {
+                        activeRowLeft = keysNumberRowLeft;
+                        activeRowRight = keysNumberRowRight;
                     }
                     setTimeout(() => {
                         graph.classList.remove("graph--out");
