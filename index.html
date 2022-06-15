@@ -50,9 +50,9 @@
                                 <div class="leaderboard__cat">Track</div>
                                 <select class="leaderboard__select leaderboard__track" id="ddlTrack">
                                     <option>Alpine Access</option>
-                                    <option>Tropical Tour</option>
+                                    <option>City Cruise</option>
                                     <option>Sunset Stretch</option>
-                                    <!-- <option>Desert Drive</option> -->
+                                    <option>Tropical Tour</option>
                                 </select>
                             </div>
                         </div>
@@ -304,14 +304,14 @@
                                     <button class="game__start mountain">Alpine Access</button>
                                 </li>
                                 <li>
-                                    <button class="game__start tropical">Tropical Tour</button>
+                                    <button class="game__start city">City Cruise</button>
                                 </li>
                                 <li>
                                     <button class="game__start sunset">Sunset Stretch</button>
                                 </li>
-                                <!-- <li>
-                                    <button class="game__start desert">Desert Drive</button>
-                                </li> -->
+                                <li>
+                                    <button class="game__start tropical">Tropical Tour</button>
+                                </li>
                                 <li>
                                     <button class="menu__back">&lt; Back</button>
                                 </li>
@@ -357,6 +357,7 @@
                     <div class="lines lines--4"></div>
                     <div class="lines lines--5"></div>
                     <div class="track"></div>
+                    <div class="horizon"></div>
                     <div class="paths paths--1"></div>
                     <div class="paths paths--2"></div>
                     <div class="paths paths--3"></div>
@@ -408,7 +409,7 @@
             const leaderboardCategory = ["Global", "Country", "State", "City", "Friends"];
             const leaderboardRows = ["Home Row", "Top Row", "Bottom Row"];
             const leaderboardSkill = ["Easy", "Normal", "Hard", "Extreme"];
-            const leaderboardTrack = ["Alpine Access", "Tropical Tour", "Sunset Stretch", "Desert Drive"];
+            const leaderboardTrack = ["Alpine Access", "City Cruise", "Sunset Stretch", "Tropical Tour"];
 
             let menuIndex = 0;
             const menuStructure = ["begin", "story", "racer", "row", "skill", "track", "game"];

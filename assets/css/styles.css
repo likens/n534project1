@@ -25,7 +25,7 @@
     --ice1: rgba(44, 206, 225, 0.5);
     --ice2: rgba(44, 206, 225, 1);
     --olive1: rgba(122, 197, 0, 0.5);
-    --olive2: #7ac500;
+    --olive2: rgba(122, 197, 0, 1);
     --lines: var(--terminal1);
     --text: var(--terminal2);
     /* --perspective: perspective(30rem) rotateX(40deg) scale(2); */
@@ -225,7 +225,8 @@ body {
 
 .graph--out .track,
 .graph--out .lines,
-.graph--out .paths {
+.graph--out .paths,
+.graph--out .horizon {
     opacity: 0;
 }
 
@@ -248,6 +249,18 @@ body {
     z-index: -1;
     transition: opacity 2s ease;
     opacity: 1;
+}
+
+.graph--game .horizon {
+    position: absolute;
+    width: 100%;
+    height: .5rem;
+    opacity: 1;
+    transition: opacity 2s ease;
+    background: rgba(0, 0, 0, .5);
+    top: 31rem;
+    left: 0;
+    z-index: -2;
 }
 
 .graph--game .lines {
@@ -297,17 +310,18 @@ body {
 }
 
 .graph--game .lines--5 {
-    transform: var(--perspectiveGame) translateY(-200%);
+    transform: var(--perspectiveGame) translateY(-198%);
     transition: opacity 2s ease;
 }
 
-.graph--desert .lines {
-    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--tan1) 0%, var(--tan1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--tan1) 0%, var(--tan1) 3px, rgba(0,0,0, .5) 0px); 
+.graph--tropical .track {
+    background-image: url("../../assets/img/track-tropical.png");
+    background-position: 0 5rem;
 }
 
-.graph--tropical .track {
-    background-image: url("../../assets/img/track-tropical2.png");
-    background-position: 0 5rem;
+.graph--tropical .horizon {
+    background: var(--olive1);
+    box-shadow: 0 0 1rem var(--olive2);
 }
 
 .graph--tropical .lines {
@@ -320,8 +334,17 @@ body {
 }
 
 .graph--mountain .track {
-    background-image: url("../../assets/img/track-mountain2.png");
+    background-image: url("../../assets/img/track-mountain.png");
     background-position: 0 14.8rem;
+}
+
+.graph--mountain .horizon {
+    background: var(--ice1);
+    box-shadow: 0 0 1rem var(--ice2);
+}
+
+.graph--mountain .paths {
+    background: linear-gradient(180deg, transparent, var(--ice1));
 }
 
 .graph--mountain .lines {
@@ -329,13 +352,14 @@ body {
     border-color: var(--ice1); 
 }
 
-.graph--mountain .paths {
-    background: linear-gradient(180deg, transparent, var(--ice1));
-}
-
 .graph--sunset .track {
     background-image: url("../../assets/img/track-sunset.png");
     background-position: 2rem 0;
+}
+
+.graph--sunset .horizon {
+    background: var(--orange1);
+    box-shadow: 0 0 1rem var(--orange2);
 }
 
 .graph--sunset .lines {
@@ -345,6 +369,25 @@ body {
 
 .graph--sunset .paths {
     background: linear-gradient(180deg, transparent, var(--orange1));
+}
+
+.graph--city .track {
+    background-image: url("../../assets/img/track-city.png");
+    background-position: 0 7rem;
+}
+
+.graph--city .horizon {
+    background: var(--purple1);
+    box-shadow: 0 0 1rem var(--pruple2);
+}
+
+.graph--city .lines {
+    background-image: linear-gradient(180deg, rgba(0,0,0, .5) 0px, var(--purple1) 0%, var(--purple1) 3px, rgba(0,0,0, .5) 0px), linear-gradient(90deg, rgba(0,0,0, .5) 0px, var(--purple1) 0%, var(--purple1) 3px, rgba(0,0,0, .5) 0px); 
+    border-color: var(--purple1);
+}
+
+.graph--city .paths {
+    background: linear-gradient(180deg, transparent, var(--purple1));
 }
 
 .graph--game .racer {
@@ -414,9 +457,7 @@ body {
 } */
 
 .menu--track ul {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 90%;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .leaderboard__select,
@@ -670,21 +711,16 @@ body {
     transform: skew(-20deg);
 }
 
-.menu--track .desert {
-    border-color: var(--tan2);
-    color: var(--tan2);
-}
-
 .menu--track .game__start {
-
     background-repeat: no-repeat;
     background-size: cover;
+    text-shadow: 1px 1px .6rem rgba(0, 0, 0, 1);
 }
 
 .menu--track .mountain {
     border-color: var(--ice2);
     color: var(--ice2);
-    background-image: url(../../assets/img/track-mountain2.png);
+    background-image: url(../../assets/img/track-mountain.png);
     background-position: -4rem 1rem;
 }
 
@@ -698,7 +734,14 @@ body {
 .menu--track .tropical {
     border-color: var(--olive2);
     color: var(--olive2);
-    background-image: url(../../assets/img/track-tropical2.png);
+    background-image: url(../../assets/img/track-tropical.png);
+    background-position: center;
+}
+
+.menu--track .city {
+    border-color: var(--purple2);
+    color: var(--purple2);
+    background-image: url(../../assets/img/track-city.png);
     background-position: center;
 }
 
@@ -709,13 +752,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.35);
     z-index: -1;
-}
-
-.menu--track .desert:hover {
-    box-shadow: var(--glow) var(--tan1);
-    background: var(--tan1);
 }
 
 .menu--track .mountain:hover {
@@ -733,13 +771,9 @@ body {
     background-color: var(--olive1);
 }
 
-.menu--track .desert:before {
-    background: linear-gradient(
-        120deg,
-        transparent,
-        var(--tan1),
-        transparent
-    );
+.menu--track .city:hover {
+    box-shadow: var(--glow) var(--purple1);
+    background-color: var(--purple1);
 }
 
 .menu--track .mountain:before {
@@ -765,6 +799,15 @@ body {
         120deg,
         transparent,
         var(--olive1),
+        transparent
+    );
+}
+
+.menu--track .city:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--purple1),
         transparent
     );
 }
