@@ -6,15 +6,18 @@
     --blue3: rgba(54, 99, 248, .7);
     --purple1: rgba(209, 54, 248, .35);
     --purple2: rgba(209, 54, 248, 1);
-    --green1: rgba(22, 240, 95, .35);
-    --green2: rgba(22, 240, 95, 1);
-    --green3: rgba(22, 240, 95, .7);
+    --terminal1: rgba(22, 240, 95, .35);
+    --terminal2: rgba(22, 240, 95, 1);
+    --terminal3: rgba(22, 240, 95, .7);
     --red1: rgba(240, 36, 0, .35);
     --red2: rgba(240, 36, 0, 1);
     --red3: rgba(240, 36, 0, .7);
     --yellow1: rgba(255, 249, 84, .35);
     --yellow2: rgba(255, 249, 84, 1);
     --yellow3: rgba(255, 249, 84, .7);
+    --green1: rgba(102, 255, 0, .35);
+    --green2: rgba(102, 255, 0, 1);
+    --green3: rgba(102, 255, 0, .7);
     --orange1: rgba(234, 159, 20, .5);
     --orange2: rgba(234, 159, 20, 1);
     --tan1: rgba(210, 180, 140, .5);
@@ -23,8 +26,8 @@
     --ice2: rgba(44, 206, 225, 1);
     --olive1: rgba(122, 197, 0, 0.5);
     --olive2: #7ac500;
-    --lines: var(--green1);
-    --text: var(--green2);
+    --lines: var(--terminal1);
+    --text: var(--terminal2);
     /* --perspective: perspective(30rem) rotateX(40deg) scale(2); */
     --perspective: perspective(60rem) rotateX(20deg) scale(2);
     --perspectiveGame: perspective(15rem) rotateX(20deg) scale(2);
@@ -353,7 +356,7 @@ body {
     z-index: 2;
     top: 0;
     left: 0;
-    background: linear-gradient(180deg, transparent, var(--green3));
+    background: linear-gradient(180deg, transparent, var(--terminal3));
     height: 100%;
     margin: 30rem 0 0 45rem;
     width: 14rem;
@@ -393,15 +396,13 @@ body {
 }
 
 .menu--racer ul {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     max-width: 80%;
     margin: 0 auto;
 }
 
 .menu--row ul {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 90%;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .menu--skill ul {
@@ -452,8 +453,8 @@ body {
 .leaderboard__select:hover,
 .menu button:hover,
 .racer__prompt:hover {
-    box-shadow: var(--glow) var(--green1);
-    background-color: var(--green1);
+    box-shadow: var(--glow) var(--terminal1);
+    background-color: var(--terminal1);
 }
 
 .leaderboard__select:before,
@@ -469,7 +470,7 @@ body {
     background: linear-gradient(
         120deg,
         transparent,
-        var(--green1),
+        var(--terminal1),
         transparent
     );
     transition: all .5s;
@@ -541,7 +542,8 @@ body {
 
 .menu--racer img {
     display: block;
-    max-width: 100%;
+    max-width: 75%;
+    margin: 0 auto;
     transform: skew(20deg);
     margin-top: -1rem;
     pointer-events: none;
@@ -562,9 +564,9 @@ body {
     color: var(--red2);
 }
 
-.menu--racer .colemak {
-    border-color: var(--purple2);
-    color: var(--purple2);
+.menu--racer .juice {
+    border-color: var(--green2);
+    color: var(--green2);
 }
 
 /* .menu--racer .alpha .cube > div {
@@ -602,9 +604,9 @@ body {
     background: var(--red1);
 }
 
-.menu--racer .colemak:hover {
-    box-shadow: var(--glow) var(--purple1);
-    background: var(--purple1);
+.menu--racer .juice:hover {
+    box-shadow: var(--glow) var(--green1);
+    background: var(--green1);
 }
 
 .menu--racer .alpha:before {
@@ -634,11 +636,11 @@ body {
     );
 }
 
-.menu--racer .colemak:before {
+.menu--racer .juice:before {
     background: linear-gradient(
         120deg,
         transparent,
-        var(--purple1),
+        var(--green1),
         transparent
     );
 }
@@ -894,6 +896,10 @@ body {
     color: var(--yellow2);
 }
 
+.leaderboard__racer--juice {
+    color: var(--green2);
+}
+
 .leaderboard__back {
     animation-delay: 1.3s;
 }
@@ -1011,6 +1017,25 @@ body {
         120deg,
         transparent,
         var(--red1),
+        transparent
+    );
+}
+
+.graph--juice .racer__prompt {
+    border-color: var(--green2);
+    color: var(--green2);
+}
+
+.graph--juice .racer__prompt--active {
+    box-shadow: var(--glow) var(--green1);
+    background: var(--green1);
+}
+
+.graph--juice .racer__prompt:before {
+    background: linear-gradient(
+        120deg,
+        transparent,
+        var(--green1),
         transparent
     );
 }
@@ -1135,8 +1160,8 @@ body {
     animation: cursor infinite cubic-bezier(1, 0, 0, 1) 1s;
     display: inline-block;
     width: 1rem;
-    box-shadow: 0 0 1rem var(--green1);
-    background: var(--green2);
+    box-shadow: 0 0 1rem var(--terminal1);
+    background: var(--terminal2);
     transform: skew(-20deg) translate(-1rem, 1rem);
     height: 7rem;
   }
