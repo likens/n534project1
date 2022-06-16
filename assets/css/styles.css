@@ -119,11 +119,29 @@ body {
     display: grid;
     justify-content: center;
     animation: var(--zoomInCenter);
-    padding: 10rem 0;
+    padding: 12rem 0 10rem;
+}
+
+.title__type {
+    display: flex;
+}
+
+.title__type span {
+    min-width: 5rem;
 }
 
 .title--hide {
     display: none;
+}
+
+.cursor { 
+    animation: cursor infinite cubic-bezier(1, 0, 0, 1) 1s;
+    display: inline-block;
+    width: 1rem;
+    box-shadow: 0 0 1rem var(--terminal1);
+    background: var(--terminal2);
+    transform: skew(-20deg) translate(3rem, .5rem);
+    height: 7rem;
 }
 
 .story {
@@ -363,7 +381,7 @@ body {
 
 .graph--sunset .track {
     background-image: url("../../assets/img/track-sunset.png");
-    background-position: 2rem 0;
+    background-position: 2rem 2rem;
 }
 
 .graph--sunset .horizon {
@@ -471,7 +489,8 @@ body {
 
 .leaderboard__select,
 .menu button,
-.racer__prompt {
+.racer__prompt,
+.pause__button {
     font-family: 'M42';
     /* font-family: '04b31'; */
     color: var(--text);
@@ -492,7 +511,8 @@ body {
 }
 
 .menu__back-btn .menu__btn, 
-.menu .menu__back {
+.menu .menu__back,
+.pause__button {
     min-width: 10rem;
     width: auto;
     margin-top: 2rem;
@@ -502,14 +522,16 @@ body {
 
 .leaderboard__select:hover,
 .menu button:hover,
-.racer__prompt:hover {
+.racer__prompt:hover,
+.pause__button:hover {
     box-shadow: var(--glow) var(--terminal1);
     background-color: var(--terminal1);
 }
 
 .leaderboard__select:before,
 .menu button:before,
-.racer__prompt:before {
+.racer__prompt:before,
+.pause__button:before {
     content: '';
     position: absolute;
     top: 0;
@@ -528,7 +550,8 @@ body {
 
 .laderboard__select:hover:before,
 .menu button:hover:before,
-.racer__prompt:hover:before {
+.racer__prompt:hover:before,
+.pause__button:hover:before {
     transform: translateX(100%);
 }
 
@@ -1132,6 +1155,102 @@ body {
     transform:translate(62rem, -9rem) skew(20deg);
 }
 
+.header {
+    position: relative;
+    width: 100%;
+    font-family: 'M42';
+    z-index: 20;
+}
+
+.score {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 2.5rem) skew(-20deg);
+    font-size: 2rem;
+    opacity: 0;
+}
+
+.graph--game .score {
+    animation: score 1s ease forwards;
+    animation-delay: 2.5s;
+}
+
+.pause {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(2rem, 1.5rem);
+    opacity: 0;
+}
+
+.pause__button {
+    font-size: 1rem;
+    margin-top: 0;
+    padding: 1.5rem 1.5rem 1rem
+}
+
+.graph--game .pause {
+    animation: pause 1s ease forwards;
+    animation-delay: 2.5s;
+}
+
+.lives {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    transform: translate(-2rem, 2.5rem);
+}
+
+.lives span {
+    display: inline-block;
+    font-size: 2rem;
+    transform: skew(-20deg);
+}
+
+.lives img {
+    display: block;
+    width: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-10rem, -2rem);
+}
+
+.graph--game .lives {
+    animation: lives 1s ease forwards;
+    animation-delay: 2.5s;
+}
+
+.cube {
+	position: absolute;
+	width: 3rem;
+    height: 3rem;
+	animation: spin 10s infinite linear;
+	transform-style: preserve-3d;
+    margin: 0 auto 3rem;
+    top: 0;
+    left: 50%;
+    z-index: 5;
+    margin: -2px 0 0 -1.5rem;
+}
+
+.cube > div {
+	border: 2px solid;
+	position: absolute;
+	width: 3rem; 
+    height: 3rem;
+	transition: transform 2s;
+}
+
+.one { transform: rotateX(90deg) translateZ(1.5rem); }
+.two { transform: translateZ(1.5rem); }
+.three { transform: rotateY(90deg) translateZ(1.5rem); }
+.four { transform: rotateY(180deg) translateZ(1.5rem); }
+.five { transform: rotateY(-90deg) translateZ(1.5rem); }
+.six { transform: rotateX(-90deg) translateZ(1.5rem); }
+
 .scanlines {
     position: absolute;
     overflow: hidden;
@@ -1182,48 +1301,10 @@ body {
     animation: scanlines 1s steps(60) infinite;
 } */
 
-.cube {
-	position: absolute;
-	width: 3rem;
-    height: 3rem;
-	animation: spin 10s infinite linear;
-	transform-style: preserve-3d;
-    margin: 0 auto 3rem;
-    top: 0;
-    left: 50%;
-    z-index: 5;
-    margin: -2px 0 0 -1.5rem;
-}
-
-.cube > div {
-	border: 2px solid;
-	position: absolute;
-	width: 3rem; 
-    height: 3rem;
-	transition: transform 2s;
-}
-
 @keyframes spin {
 	from { transform: rotateY(0) rotateX(0) }
 	to   { transform: rotateY(-360deg) rotateX(360deg) }
 }
-
-.one { transform: rotateX(90deg) translateZ(1.5rem); }
-.two { transform: translateZ(1.5rem); }
-.three { transform: rotateY(90deg) translateZ(1.5rem); }
-.four { transform: rotateY(180deg) translateZ(1.5rem); }
-.five { transform: rotateY(-90deg) translateZ(1.5rem); }
-.six { transform: rotateX(-90deg) translateZ(1.5rem); }
-
-.cursor { 
-    animation: cursor infinite cubic-bezier(1, 0, 0, 1) 1s;
-    display: inline-block;
-    width: 1rem;
-    box-shadow: 0 0 1rem var(--terminal1);
-    background: var(--terminal2);
-    transform: skew(-20deg) translate(-1rem, 1rem);
-    height: 7rem;
-  }
   
 @keyframes cursor { 
     from { opacity: 1.0; } to { opacity: 0.0; }
@@ -1295,4 +1376,19 @@ body {
 @keyframes promptRight { 
     0% {opacity:0;transform:translate(-50rem, -9rem) skew(-20deg);}
     100% {opacity:1;transform:translate(-32rem, -9rem) skew(-20deg);}
+}
+
+@keyframes pause {
+    0% {opacity:0;transform: translate(-150%, 1.5rem)}
+    100% {opacity:1;transform: translate(2rem, 1.5rem)}
+}
+
+@keyframes score {
+    0% {opacity:0;transform: translate(-50%, -150%) skew(-20deg)}
+    100% {opacity:1;transform: translate(-50%, 2.5rem) skew(-20deg)}
+}
+
+@keyframes lives {
+    0% {opacity:0;transform: translate(400%, 2.5rem)}
+    100% {opacity:1;transform: translate(-2rem, 2.5rem)}
 }

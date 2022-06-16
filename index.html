@@ -13,7 +13,18 @@
             <div class="container">
                 <div class="main">
                     <div class="title" id="title">
-                        <div class="title__type">type racer <div class="title__cursor cursor"></div></div>
+                        <div class="title__type">
+                            <span>t</span>
+                            <span>y</span>
+                            <span>p</span>
+                            <span>e</span>
+                            <span> </span>
+                            <span>r</span>
+                            <span>a</span>
+                            <span>c</span>
+                            <span>e</span>
+                            <span>r</span>
+                            <div class="title__cursor cursor"></div></div>
                     </div>
                     <div class="leaderboard menu hide" id="leaderboard">
                         <div class="leaderboard__title">Leaderboards</div>
@@ -347,34 +358,26 @@
                 <div class="todo">
                     TODO:
                     <ul>
-                        <li>Animate logo</li>
-                        <li>select rider?</li>
-                        <li>select difficulty? only on races/full word typing?</li>
-                        <li>Left/right "letters"</li>
-                        <li>Home Row: ASDFJKL;</li>
-                        <li>Top Row: QWERTYUIOP</li>
-                        <li>Bottom Row: ZXCVBNM,./</li>
-                        <li>All Rows</li>
                         <li>Timer, accuracy</li>
                         <li>Sound on/off</li>
-                        <li>pause button</li>
-                        <li>lives</li>
                         <li>"coins"</li>
                         <li>Win Screen (play again / main menu)</li>
                         <li>Fail Screen (play again / main menu)</li>
                         <li>audio tunes & effects</li>
-                        <li>some graphics for polygon vehicles</li>
                         <li>space to "jump" bottom obstacles?</li>
                     </ul>
                 </div>
-                <div class="game hide">
-                    <div class="game__menu">
-                        <button>Pause</button>
-                        <button>Quit</button>
-                    </div>
-                    <div class="game__score" id="gameScore">99999999</div>
-                </div>
                 <div class="graph" id="graph">
+                    <div class="header">
+                        <div class="pause">
+                            <button class="pause__button" id="btnPause">Pause</button>
+                        </div>
+                        <div class="score" id="score">9999999</div>
+                        <div class="lives">
+                            <img src="./assets/img/blaze_spin.gif" id="imgRacerLives" alt="" />
+                            <div class="amount">x<span>3</span></div>
+                        </div>
+                    </div>
                     <div class="lines lines--1"></div>
                     <div class="lines lines--2"></div>
                     <div class="lines lines--3"></div>
@@ -427,6 +430,7 @@
             const graph = document.getElementById("graph");
             const leaderboard = document.getElementById("leaderboard");
             const racer = document.getElementById("racer");
+            const score = document.getElementById("score");
 
             const hide = "hide";
 
@@ -451,6 +455,7 @@
             const imgRacerLeft = document.getElementById("imgRacerLeft");
             const imgRacerMid = document.getElementById("imgRacerMid");
             const imgRacerRight = document.getElementById("imgRacerRight");
+            const imgRacerLives= document.getElementById("imgRacerLives");
 
             const keysTopRowLeft = ["Q", "W", "E", "R", "T"] ;
             const keysTopRowRight = ["Y", "U", "I", "O", "P"];
@@ -463,6 +468,7 @@
 
             let activeRowLeft = [];
             let activeRowRight = [];
+            let activeRowListener = "";
 
             btnMenu.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -525,20 +531,13 @@
                     imgRacerLeft.src = `./assets/img/${car}_left.png`;
                     imgRacerMid.src = `./assets/img/${car}_mid.png`;
                     imgRacerRight.src = `./assets/img/${car}_right.png`;
+                    imgRacerLives.src = `./assets/img/${car}_spin.gif`;
                     // load row compatibility
-                    if (row === "top") {
-                        activeRowLeft = keysTopRowLeft;
-                        activeRowRight = keysTopRowRight;
-                    } else if (row === "home") {
-                        activeRowLeft = keysHomeRowLeft;
-                        activeRowRight = keysHomeRowRight;
-                    } else if (row === "bottom") {
-                        activeRowLeft = keysBottomRowLeft;
-                        activeRowRight = keysBottomRowRight;
-                    } else if (row === "number") {
-                        activeRowLeft = keysNumberRowLeft;
-                        activeRowRight = keysNumberRowRight;
-                    }
+                    setupRowKeys(row);
+                    setupRowListeners(row);
+                    // update keys
+                    generateLeftKey();
+                    generateRightKey();
                     setTimeout(() => {
                         graph.classList.remove("graph--out");
                         graph.classList.add("graph--game");
@@ -547,7 +546,6 @@
                         graph.classList.add(`graph--${row}`);
                         graph.classList.add(`graph--${difficulty}`);
                         setTimeout(() => {
-                            console.log(racer);
                             racer.classList.add("racer--ready");
                         }, 3600);
                     }, 2000);
@@ -620,6 +618,34 @@
 
             function generateRightKey() {
                 promptRight.innerText = activeRowRight[activeRowRight.length * Math.random() | 0];
+            }
+
+            function setupRowKeys(row) {
+                if (row === "top") {
+                    activeRowLeft = keysTopRowLeft;
+                    activeRowRight = keysTopRowRight;
+                } else if (row === "home") {
+                    activeRowLeft = keysHomeRowLeft;
+                    activeRowRight = keysHomeRowRight;
+                } else if (row === "bottom") {
+                    activeRowLeft = keysBottomRowLeft;
+                    activeRowRight = keysBottomRowRight;
+                } else if (row === "number") {
+                    activeRowLeft = keysNumberRowLeft;
+                    activeRowRight = keysNumberRowRight;
+                }
+            }
+
+            function setupRowListeners(row) {
+                if (row === "top") {
+                    
+                } else if (row === "home") {
+                    
+                } else if (row === "bottom") {
+                    
+                } else if (row === "number") {
+                    
+                }
             }
 
         });
