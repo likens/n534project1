@@ -187,6 +187,22 @@
                             <button class="menu__back">&lt; Back</button>
                         </div>
                     </div>
+                    <div class="pause menu hide" id="pause">
+                        <div class="menu__title">
+                            <div class="menu__title-text">Game Paused</div>
+                        </div>
+                        <ul>
+                            <li>
+                                <button class="menu__btn">Continue</button>
+                            </li>
+                            <li>
+                                <button class="menu__btn">How To Play</button>
+                            </li>
+                            <li>
+                                <button class="menu__btn">Main Menu</button>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="menus">
                         <div class="menu" id="menuBegin">
                             <ul>
@@ -336,16 +352,16 @@
                             </div>
                             <ul>
                                 <li>
-                                    <button class="game__start mountain">Alpine Access</button>
+                                    <button class="game__start mountain" id="mountain">Alpine Access</button>
                                 </li>
                                 <li>
-                                    <button class="game__start city">City Cruise</button>
+                                    <button class="game__start city" id="city">City Cruise</button>
                                 </li>
                                 <li>
-                                    <button class="game__start sunset">Sunset Stretch</button>
+                                    <button class="game__start sunset" id="sunset">Sunset Stretch</button>
                                 </li>
                                 <li>
-                                    <button class="game__start tropical">Tropical Tour</button>
+                                    <button class="game__start tropical" id="tropical">Tropical Tour</button>
                                 </li>
                                 <li>
                                     <button class="menu__back">&lt; Back</button>
@@ -369,13 +385,13 @@
                 </div>
                 <div class="graph" id="graph">
                     <div class="header">
-                        <div class="pause">
+                        <div class="options">
                             <button class="pause__button" id="btnPause">Pause</button>
                         </div>
-                        <div class="score" id="score">9999999</div>
+                        <div class="score" id="score">0000000</div>
                         <div class="lives">
                             <img src="./assets/img/blaze_spin.gif" id="imgRacerLives" alt="" />
-                            <div class="amount">x<span>3</span></div>
+                            <div class="amount">x<span id="lives">3</span></div>
                         </div>
                     </div>
                     <div class="lines lines--1"></div>
@@ -422,233 +438,6 @@
         </div>
     </body>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const root = document.querySelector(":root");
-            const title = document.getElementById("title");
-            const graph = document.getElementById("graph");
-            const leaderboard = document.getElementById("leaderboard");
-            const racer = document.getElementById("racer");
-            const score = document.getElementById("score");
-
-            const hide = "hide";
-
-            const leaderboardCategory = ["Global", "Country", "State", "City", "Friends"];
-            const leaderboardRows = ["Home Row", "Top Row", "Bottom Row", "Number Row"];
-            const leaderboardSkill = ["Easy", "Normal", "Hard", "Extreme"];
-            const leaderboardTrack = ["Alpine Access", "City Cruise", "Sunset Stretch", "Tropical Tour"];
-
-            let menuIndex = 0;
-            const menuStructure = ["begin", "story", "racer", "row", "skill", "track", "game"];
-            const menus = [...document.getElementsByClassName("menu")];
-
-            const btnNext = [...document.getElementsByClassName("menu__next")];
-            const btnBack = [...document.getElementsByClassName("menu__back")];
-            const btnStart = [...document.getElementsByClassName("game__start")];
-            const btnMenu = [...document.getElementsByClassName("menu__btn")];
-
-            const audHover = document.getElementById("audHover");
-            const audNext = document.getElementById("audNext");
-            const audBack = document.getElementById("audBack");
-
-            const imgRacerLeft = document.getElementById("imgRacerLeft");
-            const imgRacerMid = document.getElementById("imgRacerMid");
-            const imgRacerRight = document.getElementById("imgRacerRight");
-            const imgRacerLives= document.getElementById("imgRacerLives");
-
-            const keysTopRowLeft = ["Q", "W", "E", "R", "T"] ;
-            const keysTopRowRight = ["Y", "U", "I", "O", "P"];
-            const keysHomeRowLeft = ["A", "S", "D", "F", "G",];
-            const keysHomeRowRight = ["H", "J", "K", "L", ";", "'"];
-            const keysBottomRowLeft = ["Z", "X", "C", "V", "B"];
-            const keysBottomRowRight = ["N", "M", ",", ".", "/"];
-            const keysNumberRowLeft = ["`", "1", "2", "3", "4", "5"];
-            const keysNumberRowRight = ["6", "7", "8", "9", "0", "-", "="];
-
-            let activeRowLeft = [];
-            let activeRowRight = [];
-            let activeRowListener = "";
-
-            btnMenu.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (btn.textContent === "Leaderboards") {
-                        leaderboard.classList.toggle(hide);
-                    } else if (btn.textContent === "How To Play") {
-                        how.classList.toggle(hide);
-                    } else {
-                        leaderboard.classList.add(hide);
-                        how.classList.add(hide);
-                    }
-                    document.getElementById("menuBegin").classList.toggle(hide);
-                    toggleTitle();
-                });
-            });
-
-            btnNext.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    let item = menuStructure[menuIndex];
-                    updateStatus(item, btn.textContent.trim());
-                    menuIndex++;
-                    hideTitle(menuIndex);
-                    hideMenus();
-                    item = menuStructure[menuIndex];
-                    showMenu(item);
-                    // resetHover();
-                    // playNext();
-                });
-                // btn.addEventListener('mouseenter', function() {
-                //     console.log("got here");
-                //     resetHover();
-                //     audHover.play();
-                // });
-            });
-
-            btnBack.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    let item = menuStructure[menuIndex];
-                    menuIndex--;
-                    hideTitle(menuIndex);
-                    hideMenus();
-                    item = menuStructure[menuIndex];
-                    updateStatus(item, "");
-                    showMenu(item);
-                    // audBack.pause();
-                    // audBack.currentTime = 0;
-                    // audBack.play();
-                });
-            });
-
-            btnStart.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.getElementById("statusTrack").innerText = btn.textContent;
-                    const car = document.getElementById("statusRacer").innerText.trim().toLowerCase();
-                    const row = document.getElementById("statusRow").textContent.replace(" Row", "").toLowerCase();
-                    const difficulty = document.getElementById("statusSkill").innerText.trim().toLowerCase();
-                    hideMenus();
-                    graph.classList.add("graph--out");
-                    // load racer image
-                    imgRacerLeft.src = `./assets/img/${car}_left.png`;
-                    imgRacerMid.src = `./assets/img/${car}_mid.png`;
-                    imgRacerRight.src = `./assets/img/${car}_right.png`;
-                    imgRacerLives.src = `./assets/img/${car}_spin.gif`;
-                    // load row compatibility
-                    setupRowKeys(row);
-                    setupRowListeners(row);
-                    // update keys
-                    generateLeftKey();
-                    generateRightKey();
-                    setTimeout(() => {
-                        graph.classList.remove("graph--out");
-                        graph.classList.add("graph--game");
-                        graph.classList.add(`graph--${[...btn.classList][1]}`);
-                        graph.classList.add(`graph--${car}`);
-                        graph.classList.add(`graph--${row}`);
-                        graph.classList.add(`graph--${difficulty}`);
-                        setTimeout(() => {
-                            racer.classList.add("racer--ready");
-                        }, 3600);
-                    }, 2000);
-                });
-            });
-
-            document.addEventListener('keyup', (e) => {
-                if (e.code === "ArrowRight") {
-                    generateRightKey();
-                    if (racer.classList.contains("racer--mid")) {
-                        racer.classList.remove("racer--mid");
-                        racer.classList.add("racer--right");
-                    } else if (racer.classList.contains("racer--left")) {
-                        racer.classList.remove("racer--left");
-                        racer.classList.add("racer--mid");
-                    }
-                } else if (e.code === "ArrowLeft") {
-                    generateLeftKey();
-                    if (racer.classList.contains("racer--mid")) {
-                        racer.classList.remove("racer--mid");
-                        racer.classList.add("racer--left");
-                    } else if (racer.classList.contains("racer--right")) {
-                        racer.classList.remove("racer--right");
-                        racer.classList.add("racer--mid");
-                    }
-                } else if (e.code === "Space") {
-
-                }
-            });
-
-
-            function updateStatus(item, text) {
-                const status = document.getElementById(`status${item[0].toUpperCase() + item.slice(1)}`);
-                if (status) {
-                    status.innerText = text.includes("_") ? text.substring(5).trim() : text;
-                }
-            }
-
-            function hideTitle(index) {
-                index === 0 ? title.classList.remove(hide) : title.classList.add(hide)
-            }
-
-            function toggleTitle() {
-                title.classList.toggle(hide);
-            }
-
-            function showMenu(item) {
-                document.getElementById(`menu${item[0].toUpperCase() + item.slice(1)}`).classList.remove(hide);
-            }
-
-            function hideMenus() {
-                menus.forEach(menu => menu.classList.add(hide));
-            }
-
-            // function resetHover() {
-            //     audHover.pause();
-            //     audHover.currentTime = 0;
-            // }
-
-            // function playNext() {
-            //     resetHover();
-            //     audNext.pause();
-            //     audNext.currentTime = 0;
-            //     audNext.play();
-            // }
-
-            function generateLeftKey() {
-                promptLeft.innerText = activeRowLeft[activeRowLeft.length * Math.random() | 0];
-            }
-
-            function generateRightKey() {
-                promptRight.innerText = activeRowRight[activeRowRight.length * Math.random() | 0];
-            }
-
-            function setupRowKeys(row) {
-                if (row === "top") {
-                    activeRowLeft = keysTopRowLeft;
-                    activeRowRight = keysTopRowRight;
-                } else if (row === "home") {
-                    activeRowLeft = keysHomeRowLeft;
-                    activeRowRight = keysHomeRowRight;
-                } else if (row === "bottom") {
-                    activeRowLeft = keysBottomRowLeft;
-                    activeRowRight = keysBottomRowRight;
-                } else if (row === "number") {
-                    activeRowLeft = keysNumberRowLeft;
-                    activeRowRight = keysNumberRowRight;
-                }
-            }
-
-            function setupRowListeners(row) {
-                if (row === "top") {
-                    
-                } else if (row === "home") {
-                    
-                } else if (row === "bottom") {
-                    
-                } else if (row === "number") {
-                    
-                }
-            }
-
-        });
-    </script>
+    <script src="./assets/js/scripts.js"></script>
 
 </html>
