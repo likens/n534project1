@@ -7,6 +7,7 @@ const score = document.getElementById("score");
 const livesEl = document.getElementById("lives");
 const pauseEl = document.getElementById("pause");
 const howEl = document.getElementById("how");
+const statusEl = document.getElementById("status");
 
 const hide = "hide";
 
@@ -36,27 +37,57 @@ const keysNumberRowRight = ["6", "7", "8", "9", "0", "-", "="];
 let activeRowLeft = [];
 let activeRowRight = [];
 let activeRowListener = "";
+let scoreFn = undefined;
 let activeScore = 0;
-
 
 document.addEventListener('DOMContentLoaded', () => {
 
     btnMenu.forEach(btn => {
         btn.addEventListener('click', function() {
+
             if (btn.textContent === "Leaderboards") {
-                leaderboardEl.classList.toggle(hide);
-                toggleMainMenu();
+
+                // Leaderboards Button
+                leaderboardEl.classList.remove(hide);
+                title.classList.add(hide);
+                menuBegin.classList.add(hide);
+
             } else if (btn.textContent === "How To Play") {
-                howEl.classList.toggle(hide);
-                toggleMainMenu();
-            } else if (btn.textContent === "Continue") {
-                pauseEl.classList.toggle(hide);
-                graphEl.classList.toggle(graphClazz("pause"));
-            } else {
-                leaderboardEl.classList.add(hide);
-                howEl.classList.add(hide);
+
+                // How To Play Button
+                howEl.classList.remove(hide);
                 pauseEl.classList.add(hide);
-                toggleMainMenu();
+                title.classList.add(hide);
+                menuBegin.classList.add(hide);
+                
+            } else if (btn.textContent === "Continue") {
+
+                // Game paused, Continue button
+                pauseEl.classList.add(hide);
+                graphEl.classList.remove(graphClazz("pause"));
+
+            } else if (btn.textContent === "Exit to Main Menu") {
+
+                // Game paused, Exit button
+                showTitle();
+                graphEl.className = "";
+                graphEl.classList.add("graph");
+                racerEl.classList.remove(racerClazz("ready"));
+                [...statusEl.childNodes].forEach(child => child.textContent = "");
+                menuIndex = 0;
+                activeScore = 0;
+                score.textContent = "0000000";
+                clearInterval(scoreFn);
+
+            } else if (graphEl.classList.contains(graphClazz("pause"))) {
+                
+                // Game paused, How To Play back button 
+                howEl.classList.add(hide);
+                pauseEl.classList.remove(hide);
+
+            } else {
+                // Other back buttons
+                showTitle();
             }
         });
     });
@@ -115,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     racerEl.classList.add(racerClazz("ready"));
                     setTimeout(() => {
                         // start score
-                        setInterval(scoreInterval, 100);
+                        scoreFn = setInterval(scoreInterval, 100);
                     }, 500);
                 }, 3600);
             }, 2000);
@@ -123,35 +154,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnPause.addEventListener("click", function() {
-        pauseEl.classList.remove(hide);
-        graphEl.classList.add(graphClazz("pause"));
+        pauseGame();
     });
 
 });
 
 document.addEventListener('keyup', (e) => {
-    if (e.code === "ArrowLeft") {
-        if (racerEl.classList.contains(racerClazz("mid"))) {
-            racerEl.classList.remove(racerClazz("mid"));
-            racerEl.classList.add(racerClazz("left"));
-        } else if (racerEl.classList.contains(racerClazz("right"))) {
-            racerEl.classList.remove(racerClazz("right"));
-            racerEl.classList.add(racerClazz("mid"));
-        }
-        updateLeftKey();
-    } else if (e.code === "ArrowRight") {
-        if (racerEl.classList.contains(racerClazz("mid"))) {
-            racerEl.classList.remove(racerClazz("mid"));
-            racerEl.classList.add(racerClazz("right"));
-        } else if (racerEl.classList.contains(racerClazz("left"))) {
-            racerEl.classList.remove(racerClazz("left"));
-            racerEl.classList.add(racerClazz("mid"));
-        }
-        updateRightKey();
-    } else if (e.code === "Space") {
-
+    switch (e.code) {
+        case "ArrowLeft":
+            if (racerEl.classList.contains(racerClazz("mid"))) {
+                racerEl.classList.remove(racerClazz("mid"));
+                racerEl.classList.add(racerClazz("left"));
+            } else if (racerEl.classList.contains(racerClazz("right"))) {
+                racerEl.classList.remove(racerClazz("right"));
+                racerEl.classList.add(racerClazz("mid"));
+            }
+            updateLeftKey();
+            break;
+        case "ArrowRight":
+            if (racerEl.classList.contains(racerClazz("mid"))) {
+                racerEl.classList.remove(racerClazz("mid"));
+                racerEl.classList.add(racerClazz("right"));
+            } else if (racerEl.classList.contains(racerClazz("left"))) {
+                racerEl.classList.remove(racerClazz("left"));
+                racerEl.classList.add(racerClazz("mid"));
+            }
+            updateRightKey();
+            break;
+        case "Space":
+            console.log("space pressed");
+            break;
+        case "Escape":
+            if (graphEl.classList.contains(graphClazz("game")) && 
+                !graphEl.classList.contains(graphClazz("pause"))) {
+                pauseGame();
+            };
+            break;
     }
 });
+
+function showTitle() {
+    leaderboardEl.classList.add(hide);
+    howEl.classList.add(hide);
+    pauseEl.classList.add(hide);
+    graphEl.classList.remove(graphClazz("pause"));
+    title.classList.remove(hide);
+    menuBegin.classList.remove(hide);
+}
 
 function scoreInterval() {
     activeScore = activeScore + 10;
@@ -169,17 +218,17 @@ function hideTitle(index) {
     index === 0 ? title.classList.remove(hide) : title.classList.add(hide)
 }
 
-function toggleMainMenu() {
-    title.classList.toggle(hide);
-    menuBegin.classList.toggle(hide);
-}
-
 function showMenu(item) {
     document.getElementById(`menu${item[0].toUpperCase() + item.slice(1)}`).classList.remove(hide);
 }
 
 function hideMenus() {
     menus.forEach(menu => menu.classList.add(hide));
+}
+
+function pauseGame() {
+    pauseEl.classList.remove(hide);
+    graphEl.classList.add(graphClazz("pause"));
 }
 
 function setupRowKeys(row) {
