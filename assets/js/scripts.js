@@ -37,11 +37,15 @@ const keysNumberRowRight = ["7", "8", "9", "0", "-", "="];
 const keysLeft = [...keysTopRowLeft, ...keysHomeRowLeft, ...keysBottomRowLeft, ...keysNumberRowLeft];
 const keysRight = [...keysTopRowRight, ...keysHomeRowRight, ...keysBottomRowRight, ...keysNumberRowRight];
 
+const objects = [blocker1, blocker2, blocker3, blocker1, blocker2, blocker3, powerup1, powerup2, powerup3];
+
 let activeRowLeft = [];
 let activeRowRight = [];
-let activeRowListener = "";
 let scoreFn = undefined;
 let activeScore = 0;
+let activeObject = undefined;
+let objectFn = undefined;
+let activeDifficulty = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -111,6 +115,8 @@ function menuButtons(btn) {
         // Game paused, Continue button
         pauseEl.classList.add(hide);
         graphEl.classList.remove(graphClazz("pause"));
+        scoreFn = setInterval(scoreInterval, 100);
+        objectFn = setInterval(objectInterval, activeDifficulty * 1000);
 
     } else if (btn.textContent === "Exit to Main Menu") {
 
@@ -120,8 +126,12 @@ function menuButtons(btn) {
         graphEl.classList.add("graph");
         racerEl.classList.remove(racerClazz("ready"));
         [...statusEl.childNodes].forEach(child => child.textContent = "");
+        resetRacer();
         menuIndex = 0;
         activeScore = 0;
+        activeDifficulty = 0;
+        activeRowLeft = [];
+        activeRowRight = [];
         score.textContent = "0000000";
         clearInterval(scoreFn);
 
@@ -174,13 +184,17 @@ function startButtons(btn) {
     // load row compatibility
     setupRowKeys(row);
 
-    // update lives
+    // update lives and speed
     setupLives(difficulty);
 
     // fade into game with "timers"
     setTimeout(() => {
         graphEl.classList.remove(graphClazz("out"));
         graphEl.classList.add(graphClazz("game"), graphClazz(track), graphClazz(racer), graphClazz(row), graphClazz(difficulty));
+        setTimeout(() => {
+            // start objects
+            objectFn = setInterval(objectInterval, activeDifficulty * 1000);
+        }, 2000);
         setTimeout(() => {
             racerEl.classList.add(racerClazz("ready"));
             setTimeout(() => {
@@ -205,6 +219,12 @@ function scoreInterval() {
     score.textContent = String(activeScore).padStart(7, "0");
 }
 
+function objectInterval() {
+    objects.forEach(obj => obj.classList.remove("object--run"));
+    activeObject = objects[objects.length * Math.random() | 0];
+    activeObject.classList.add("object--run");
+}
+
 function updateStatus(item, text) {
     const status = document.getElementById(`status${item[0].toUpperCase() + item.slice(1)}`);
     if (status) {
@@ -227,6 +247,9 @@ function hideMenus() {
 function pauseGame() {
     pauseEl.classList.remove(hide);
     graphEl.classList.add(graphClazz("pause"));
+    objects.forEach(obj => obj.classList.remove("object--run"));
+    clearInterval(scoreFn);
+    clearInterval(objectFn);
 }
 
 function setupRowKeys(row) {
@@ -287,23 +310,33 @@ function updateRightKey() {
     activeRight.innerText = activeRowRight[activeRowRight.length * Math.random() | 0];
 }
 
+function resetRacer() {
+    racerEl.classList.remove(racerClazz("left"), racerClazz("right"));
+    racerEl.classList.add(racerClazz("mid"));
+}
+
 function setupLives(difficulty) {
     let amount = 0;
     switch (difficulty) {
         case "easy":
             amount = 6;
+            activeDifficulty = 8;
         break;
         case "normal":
             amount = 4;
+            activeDifficulty = 6;
         break;
         case "hard":
             amount = 2;
+            activeDifficulty = 4;
         break;
         case "extreme":
             amount = 1;
+            activeDifficulty = 2;
         break;
         default:
             amount = 3;
+            activeDifficulty = 2;
     }
     livesEl.textContent = amount;
 }

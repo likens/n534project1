@@ -1028,6 +1028,7 @@ body {
     background-color: rgba(0,0,0, .75);
     opacity: 0;
     transition: none;
+    pointer-events: none;
 }
 
 .graph--game .racer__prompt--left {
@@ -1202,6 +1203,10 @@ body {
     opacity: .1;
 }
 
+.graph--pause .lines {
+    animation-play-state: paused;
+}
+
 .lives {
     position: absolute;
     opacity: 0;
@@ -1244,37 +1249,61 @@ body {
     line-height: 1;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-    animation-duration: 2s;
     font-family: 'M42';
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: scale(.25) translateY(-30rem);
+    transform: scale(.25) translateY(-25rem);
     padding: 2rem 1.5rem 1.5rem 2rem;
     font-size: 6rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 12rem;
-    height: 12rem;
+    width: 15rem;
+    height: 10rem;
     margin-top: -6rem;
     transform-style: preserve-3d;
     opacity: 0;
 }
 
-.graph--game .object--1 {
+.graph--game .object--1.object--run {
     animation-name: object1;
-    margin-left: -6rem;
 }
 
-.graph--game .object--2 {
+.object--1 {
+    margin-left: -7rem;
+}
+
+.graph--game .object--2.object--run {
     animation-name: object2;
-    margin-left: -10rem;
 }
 
-.graph--game .object--3 {
+.object--2 {
+    margin-left: -12rem;
+}
+
+.graph--game .object--3.object--run {
     animation-name: object3;
-    margin-left: -1rem;
+}
+
+.object--3 {
+    margin-left: -2rem;
+}
+
+.graph--easy .object {
+    animation-duration: 8s;
+}
+
+.graph--normal .object {
+    animation-duration: 6s;
+}
+
+.graph--hard .object {
+    animation-duration: 4s;
+}
+
+.graph--extreme .object {
+    animation-duration: 2s;
 }
 
 .blocker {
@@ -1283,7 +1312,6 @@ body {
 
 .powerup {
     background: var(--terminal2);
-    margin-top: 0;
 }
 
 .cube {
@@ -1457,16 +1485,16 @@ body {
 }
 
 @keyframes object1 {
-    0% {transform: scale(.25) translateY(-30rem);opacity:1;}
-    100% {transform: scale(1) translateY(50rem);opacity:1;}
+    0% {transform: scale(.25) translateY(-20rem);opacity:1;}
+    100% {transform: scale(1) translateY(45rem);opacity:1;}
 }
 
 @keyframes object2 {
-    0% {transform: scale(.25) translateY(-30rem);opacity:1;}
+    0% {transform: scale(.25) translateY(-20rem);opacity:1;}
     100% {transform: scale(1) translate(-36rem, 45rem);opacity:1;}
 }
 
 @keyframes object3 {
-    0% {transform: scale(.25) translateY(-30rem);opacity:1;}
+    0% {transform: scale(.25) translateY(-20rem);opacity:1;}
     100% {transform: scale(1) translate(36rem, 45rem);opacity:1;}
 }
