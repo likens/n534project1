@@ -179,7 +179,7 @@
                     </div>
                     <div class="story menu hide" id="menuStory">
                         <div class="story__title">In the far future of virtual worlds...</div>
-                        <div class="story__content">Professional racing is no longer done with vehicles, but completed by those who can type on a physical keyboard the fastest. You've proven to be the best touch-typist from your virtual club and are entered into an amateur league to represent your peers. Do you have what it takes to climb the ranks, reach the top, and become a legendary type racer?</div>
+                        <div class="story__content">Professional racing is no longer done with cars, but completed by those who can type on a physical keyboard the fastest. You've proven to be the best touch-typist from your virtual club and are entered into an amateur league to represent your peers. Do you have what it takes to climb the ranks, reach the top, and become a legendary type racer?</div>
                         <div class="story__next">
                             <button class="menu__next">Let's Do This !</button>
                         </div>
@@ -210,7 +210,7 @@
                         </ul>
                     </div>
                     <div class="menus">
-                        <div class="menu" id="menuBegin">
+                        <div class="menu menu--begin" id="menuBegin">
                             <ul>
                                 <li>
                                     <button class="menu__next">Start</button>
@@ -333,25 +333,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- <div class="menu menu--mode hide" id="menuMode">
-                            <div class="menu__title">
-                                <div class="menu__title-text">Select A Mode</div>
-                            </div>
-                            <ul>
-                                <li>
-                                    <button class="menu__next">Solo</button>
-                                </li>
-                                <li>
-                                    <button class="menu__next">Versus</button>
-                                </li>
-                                <li>
-                                    <button class="menu__next">Practice</button>
-                                </li>
-                                <li>
-                                    <button class="menu__back">&lt; Back</button>
-                                </li>
-                            </ul>
-                        </div> -->
                         <div class="menu menu--track hide" id="menuTrack">
                             <div class="menu__title">
                                 <div class="menu__title-text">Select A Track</div>
@@ -411,11 +392,19 @@
                     <div class="paths paths--2"></div>
                     <div class="paths paths--3"></div>
                     <div class="racer racer--mid" id="racer">
-                        <button class="racer__prompt racer__prompt--left" id="promptLeft">Q</button>
+                        <button class="racer__prompt racer__prompt--left" id="activeLeft">Q</button>
                         <img src="./assets/img/blaze_left.png" id="imgRacerLeft" class="racer__img racer__img--left" alt="" />
                         <img src="./assets/img/blaze_mid.png" id="imgRacerMid" class="racer__img racer__img--mid" alt="" />
                         <img src="./assets/img/blaze_right.png" id="imgRacerRight" class="racer__img racer__img--right" alt="" />
-                        <button class="racer__prompt racer__prompt--right" id="promptRight">U</button>
+                        <button class="racer__prompt racer__prompt--right" id="activeRight">U</button>
+                    </div>
+                    <div class="objects">
+                        <!-- <div class="blocker object object--1">X</div>
+                        <div class="blocker object object--2">X</div>
+                        <div class="blocker object object--3">X</div> -->
+                        <!-- <div class="powerup object object--1">+</div>
+                        <div class="powerup object object--2">+</div>
+                        <div class="powerup object object--3">+</div> -->
                     </div>
                 </div>
                 <div class="footer">
@@ -425,7 +414,6 @@
                     <div id="statusRacer"></div>
                     <div id="statusRow"></div>
                     <div id="statusSkill"></div>
-                    <!-- <div id="statusMode"></div> -->
                     <div id="statusTrack"></div>
                 </div>
                 <div class="scanlines"></div>

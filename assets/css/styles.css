@@ -37,6 +37,8 @@
     --bronze1: rgba(205, 127, 50, .1);
     --bronze2: rgba(205, 127, 50, .25);
     --bronze3: rgba(205, 127, 50, 1);
+    --blocker: rgba(255, 0, 100, 1);
+    --powerup: rgb(0, 110, 255);
     /* --perspective: perspective(30rem) rotateX(40deg) scale(2); */
     --perspective: perspective(60rem) rotateX(20deg) scale(2);
     --perspectiveGame: perspective(15rem) rotateX(20deg) scale(2);
@@ -351,7 +353,7 @@ body {
 
 .graph--tropical .track {
     background-image: url("../../assets/img/track-tropical.png");
-    background-position: 0 5rem;
+    background-position: 0 7rem;
 }
 
 .graph--tropical .horizon {
@@ -423,10 +425,6 @@ body {
 
 .graph--city .paths {
     background: linear-gradient(180deg, transparent, var(--purple1));
-}
-
-.graph--game .racer {
-
 }
 
 .paths {
@@ -1189,10 +1187,6 @@ body {
     opacity: 0;
 }
 
-.pause {
-    
-}
-
 .pause__button {
     font-size: 1rem;
     margin-top: 0;
@@ -1234,6 +1228,62 @@ body {
 .graph--game .lives {
     animation: lives 1s ease forwards;
     animation-delay: 2.7s;
+}
+
+.objects {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 8;
+    width: 100%;
+    height: 100%;
+}
+
+.object {
+    color: rgba(0,0,0,1);
+    line-height: 1;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+    font-family: 'M42';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: scale(.25) translateY(-30rem);
+    padding: 2rem 1.5rem 1.5rem 2rem;
+    font-size: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12rem;
+    height: 12rem;
+    margin-top: -6rem;
+    transform-style: preserve-3d;
+    opacity: 0;
+}
+
+.graph--game .object--1 {
+    animation-name: object1;
+    margin-left: -6rem;
+}
+
+.graph--game .object--2 {
+    animation-name: object2;
+    margin-left: -10rem;
+}
+
+.graph--game .object--3 {
+    animation-name: object3;
+    margin-left: -1rem;
+}
+
+.blocker {
+    background: var(--blocker);
+}
+
+.powerup {
+    background: var(--terminal2);
+    margin-top: 0;
 }
 
 .cube {
@@ -1404,4 +1454,19 @@ body {
 @keyframes lives {
     0% {opacity:0;transform: translate(400%, 2.5rem)}
     100% {opacity:1;transform: translate(-2rem, 2.5rem)}
+}
+
+@keyframes object1 {
+    0% {transform: scale(.25) translateY(-30rem);opacity:1;}
+    100% {transform: scale(1) translateY(50rem);opacity:1;}
+}
+
+@keyframes object2 {
+    0% {transform: scale(.25) translateY(-30rem);opacity:1;}
+    100% {transform: scale(1) translate(-36rem, 45rem);opacity:1;}
+}
+
+@keyframes object3 {
+    0% {transform: scale(.25) translateY(-30rem);opacity:1;}
+    100% {transform: scale(1) translate(36rem, 45rem);opacity:1;}
 }
