@@ -172,7 +172,12 @@
                     </div>
                     <div class="how menu hide" id="how">
                         <div class="how__title">How To Play</div>
-                        <div class="how__content">Something will go here</div>
+                        <div class="how__prompt how__prompt--pause">Clicking this button or pressing the Escape key will pause your game.</div>
+                        <div class="how__prompt how__prompt--score">Your score will increase the farther and longer you go on each track. Collect Powerups to go faster!</div>
+                        <div class="how__prompt how__prompt--lives">Your lives will decrease every time you hit a Blocker. It's Game Over when you run out!</div>
+                        <div class="how__prompt how__prompt--blocker">Avoid all Blockers! These will cause you to lose lives.</div>
+                        <div class="how__prompt how__prompt--powerup">Collect all Powerups! These will increase your speed and score.</div>
+                        <div class="how__prompt how__prompt--racer">Type the indicated key on the left or right of your Racer to avoid Blockers and collect Powerups!</div>
                         <div class="how__back menu__back-btn">
                             <button class="how__btn menu__btn">&lt; Back</button>
                         </div>
@@ -195,10 +200,10 @@
                             <li>
                                 <button class="menu__btn">Continue</button>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <button class="menu__btn">How To Play</button>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <button class="menu__btn">Game Win Screen</button>
                             </li>
                             <li>
@@ -361,11 +366,11 @@
                 <div class="todo">
                     TODO:
                     <ul>
-                        <li>Timer, accuracy</li>
+                        <li>How To Play Screen</li>
+                        <li>Game Win Screen (with play again)</li>
+                        <li>Game Over Screen (with play again)</li>
+                        <li>3, 2, 1, START intro</li>
                         <li>Sound on/off</li>
-                        <li>"coins"</li>
-                        <li>Win Screen (play again / main menu)</li>
-                        <li>Fail Screen (play again / main menu)</li>
                         <li>audio tunes & effects</li>
                         <li>space to "jump" bottom obstacles?</li>
                     </ul>
@@ -398,14 +403,12 @@
                         <img src="./assets/img/blaze_right.png" id="imgRacerRight" class="racer__img racer__img--right" alt="" />
                         <button class="racer__prompt racer__prompt--right" id="activeRight">U</button>
                     </div>
-                    <div class="objects">
-                        <div class="blocker object object--1" id="blocker1">X</div>
-                        <div class="blocker object object--2" id="blocker2">X</div>
-                        <div class="blocker object object--3" id="blocker3">X</div>
-                        <div class="powerup object object--1" id="powerup1">+</div>
-                        <div class="powerup object object--2" id="powerup2">+</div>
-                        <div class="powerup object object--3" id="powerup3">+</div>
-                    </div>
+                    <div class="blocker object object--1" id="blocker1">X</div>
+                    <div class="blocker object object--2" id="blocker2">X</div>
+                    <div class="blocker object object--3" id="blocker3">X</div>
+                    <div class="powerup object object--1" id="powerup1">+</div>
+                    <div class="powerup object object--2" id="powerup2">+</div>
+                    <div class="powerup object object--3" id="powerup3">+</div>
                 </div>
                 <div class="footer">
                     <div class="version">v0.0.1 alpha</div>

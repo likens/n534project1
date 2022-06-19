@@ -170,6 +170,10 @@ body {
     font-style: italic;
 }
 
+.how__title {
+    padding-top: 21rem;
+}
+
 .how__content,
 .story__content {
     opacity: 0;
@@ -180,6 +184,60 @@ body {
     max-width: 80%;
     margin: 0 auto;
     padding: 0 0 1rem;
+}
+
+.how__prompt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.6rem;
+    width: 22rem;
+    text-align: left;
+    font-variant: small-caps;
+    z-index: 5;
+}
+
+.how__prompt--pause {
+    top: 7rem;
+    left: -25rem;
+}
+
+.how__prompt--lives {
+    left: auto;
+    right: -24rem;
+    top: 7rem;
+    text-align: right;
+}
+
+.how__prompt--score {
+    top: 7rem;
+    width: 42rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.how__prompt--blocker {
+    top: 39rem;
+    left: -16rem;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.how__prompt--powerup {
+    top: 39rem;
+    right: -18rem;
+    left: auto;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.how__prompt--racer {
+    top: 51rem;
+    width: 65rem;
+    text-align: center;
+    font-size: 2.4rem;
+    left: -6rem;
 }
 
 .story__next {
@@ -265,14 +323,16 @@ body {
     opacity: 0;
 }
 
-.graph--game {
+.graph--game,
+.graph--how {
     width: 100%;
     height: 100%;
     opacity: 1;
     transition: all .25s ease;
 }
 
-.graph--game .track {
+.graph--game .track,
+.graph--how .track {
     pointer-events: none;
     position: absolute;
     top: 0;
@@ -287,7 +347,8 @@ body {
     opacity: 1;
 }
 
-.graph--game .horizon {
+.graph--game .horizon,
+.graph--how .horizon {
     position: absolute;
     width: 100%;
     height: .5rem;
@@ -299,7 +360,8 @@ body {
     z-index: -2;
 }
 
-.graph--game .lines {
+.graph--game .lines,
+.graph--how .lines {
     width: 112.4rem;
     margin-left: -5rem;
     z-index: 1;
@@ -326,29 +388,39 @@ body {
     transition: opacity 4s ease;
 }
 
-.graph--game .lines--1 {
+.graph--game .lines--1,
+.graph--how .lines--1 {
     transform: var(--perspectiveGame) translateY(0);
     animation-name: game1;
 }
 
-.graph--game .lines--2 {
+.graph--game .lines--2,
+.graph--how .lines--2 {
     transform: var(--perspectiveGame) translateY(-100%);
     animation-name: game2;
 }
 
-.graph--game .lines--3 {
+.graph--game .lines--3,
+.graph--how .lines--3 {
     transform: var(--perspectiveGame) translateY(100%);
     animation-name: game3;
 }
 
-.graph--game .lines--4 {
+.graph--game .lines--4,
+.graph--how .lines--4 {
     transform: var(--perspectiveGame) translateY(200%);
     animation-name: game4;
 }
 
-.graph--game .lines--5 {
+.graph--game .lines--5,
+.graph--how .lines--5 {
     transform: var(--perspectiveGame) translateY(-202%);
     transition: opacity 2s ease;
+}
+
+.graph--how .horizon {
+    background: var(--terminal1);
+    box-shadow: 0 0 1rem var(--terminal2);
 }
 
 .graph--tropical .track {
@@ -427,6 +499,15 @@ body {
     background: linear-gradient(180deg, transparent, var(--purple1));
 }
 
+.graph--how .lines {
+    animation-play-state: paused;
+}
+
+.graph--how .paths {
+    opacity: .3;
+    transition: none;
+}
+
 .paths {
     position: absolute;
     z-index: 2;
@@ -451,6 +532,13 @@ body {
 
 .paths--3 {
     transform: var(--perspectiveGame) translateY(-34rem) translateX(16rem);
+}
+
+.graph--how .lines,
+.graph--how .track,
+.graph--how .horizon,
+.graph--how .paths {
+    opacity: .25;
 }
 
 .menu {
@@ -1005,6 +1093,11 @@ body {
     margin-left: -8.6rem; */
 }
 
+.graph--how .racer__img {
+    animation: none;
+    transform:translateY(-8rem);
+}
+
 .racer__img--mid {
     left: 50%;
     margin-left: -8.6rem;
@@ -1037,10 +1130,24 @@ body {
     animation-delay: 2.7s;
 }
 
+.graph--how .racer__prompt--left {
+    left: 0;
+    opacity:1;
+    transform:translate(32rem, -9rem) skew(20deg);
+    animation: none;
+}
+
 .graph--game .racer__prompt--right {
     right: 0;
     animation: promptRight 1s ease forwards;
     animation-delay: 2.7s;
+}
+
+.graph--how .racer__prompt--right {
+    right: 0;
+    opacity:1;
+    transform:translate(-32rem, -9rem) skew(-20deg);
+    animation: none;
 }
 
 .graph--alpha .racer__prompt {
@@ -1180,6 +1287,12 @@ body {
     animation-delay: 2.7s;
 }
 
+.graph--how .score {
+    animation: none;
+    opacity:1;
+    transform: translate(-50%, 2.5rem) skew(-20deg);
+}
+
 .options {
     position: absolute;
     top: 0;
@@ -1199,12 +1312,23 @@ body {
     animation-delay: 2.7s;
 }
 
+.graph--how .options {
+    animation: none;
+    opacity:1;
+    transform: translate(2rem, 1.5rem);
+    pointer-events: none;
+}
+
 .graph--pause {
     opacity: .1;
 }
 
 .graph--pause .lines {
     animation-play-state: paused;
+}
+
+.graph--pause.graph--how {
+    opacity: 1;
 }
 
 .lives {
@@ -1235,13 +1359,11 @@ body {
     animation-delay: 2.7s;
 }
 
-.objects {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 8;
-    width: 100%;
-    height: 100%;
+.graph--how .lives {
+    animation: none;
+    opacity: 1;
+    transform: translate(-2rem, 2.5rem);
+    pointer-events: none;
 }
 
 .object {
@@ -1264,6 +1386,7 @@ body {
     margin-top: -6rem;
     transform-style: preserve-3d;
     opacity: 0;
+    z-index: 5;
 }
 
 .graph--game .object--1.object--run {
@@ -1304,6 +1427,18 @@ body {
 
 .graph--extreme .object {
     animation-duration: 2s;
+}
+
+.graph--how .blocker.object--2 {
+    animation: none;
+    opacity: 1;
+    transform: scale(.5) translate(-18rem, 10rem);
+}
+
+.graph--how .powerup.object--3 {
+    animation: none;
+    opacity: 1;
+    transform: scale(.5) translate(18rem, 10rem);
 }
 
 .blocker {

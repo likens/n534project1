@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('keyup', (e) => {
+    console.log(e.key.toUpperCase());
     if (graphEl.classList.contains(graphClazz("game")) && 
         !graphEl.classList.contains(graphClazz("pause"))) {
         const key = e.key.toUpperCase();
@@ -106,15 +107,18 @@ function menuButtons(btn) {
 
         // How To Play Button
         howEl.classList.remove(hide);
+        graphEl.classList.add(graphClazz("how"));
         pauseEl.classList.add(hide);
         title.classList.add(hide);
         menuBegin.classList.add(hide);
+        score.textContent = "0012345";
         
     } else if (btn.textContent === "Continue") {
 
         // Game paused, Continue button
         pauseEl.classList.add(hide);
         graphEl.classList.remove(graphClazz("pause"));
+        graphEl.classList.remove(graphClazz("how"));
         scoreFn = setInterval(scoreInterval, 100);
         objectFn = setInterval(objectInterval, activeDifficulty * 1000);
 
@@ -128,22 +132,24 @@ function menuButtons(btn) {
         [...statusEl.childNodes].forEach(child => child.textContent = "");
         resetRacer();
         menuIndex = 0;
-        activeScore = 0;
         activeDifficulty = 0;
         activeRowLeft = [];
         activeRowRight = [];
-        score.textContent = "0000000";
+        resetScore();
         clearInterval(scoreFn);
 
     } else if (graphEl.classList.contains(graphClazz("pause"))) {
         
         // Game paused, How To Play back button 
         howEl.classList.add(hide);
+        graphEl.classList.remove(graphClazz("how"));
         pauseEl.classList.remove(hide);
 
     } else {
         // Other back buttons
         showTitle();
+        resetScore();
+        graphEl.classList.remove(graphClazz("how"));
     }
 }
 
@@ -250,6 +256,11 @@ function pauseGame() {
     objects.forEach(obj => obj.classList.remove("object--run"));
     clearInterval(scoreFn);
     clearInterval(objectFn);
+}
+
+function resetScore() {
+    activeScore = 0;
+    score.textContent = "0000000";
 }
 
 function setupRowKeys(row) {
